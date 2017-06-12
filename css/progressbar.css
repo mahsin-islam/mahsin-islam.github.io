@@ -1,0 +1,80 @@
+.progressbar {
+    width:100%;
+    height: 13px;
+    margin: 0 auto 20px auto;
+    padding: 0px;
+    
+    background: #cfcfcf;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #aaa #bbb #fff #bbb;    
+    box-shadow: inset 0px 2px 3px #bbb;    
+}
+.progressbar, .progressbar-inner {
+    border-radius:4px;
+    -moz-border-radius:4px;
+    -webkit-border-radius:4px;
+    -o-border-radius:4px;
+}
+.progressbar-inner {
+    width: 77%;
+    height: 100%;
+    background: #999;
+    background-size: 18px 18px;
+    background-color: #ac0;   
+    background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                        transparent 75%, transparent);
+    background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                        transparent 75%, transparent);
+    background-image: -ms-linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                        transparent 75%, transparent);
+    background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                        transparent 75%, transparent);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+                        transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+                        transparent 75%, transparent);
+    
+    box-shadow:inset 0px 2px 8px rgba(255, 255, 255, .5), inset -1px -1px 0px rgba(0, 0, 0, .2);
+}
+
+/*
+ * Color Options
+ */
+
+.progressbar-inner {
+    background-color: #f2c345;
+}
+.percent_10 .progressbar-inner {
+	width: 10%;
+}
+.percent_20 .progressbar-inner {
+	width: 20%;
+}
+.percent_30 .progressbar-inner {
+	width: 30%;
+}
+.percent_40 .progressbar-inner {
+	width: 40%;
+}
+.percent_50 .progressbar-inner {
+	width: 50%;
+}
+.percent_60 .progressbar-inner {
+	width: 60%;
+}
+.percent_70 .progressbar-inner {
+	width: 70%;
+}
+.percent_80 .progressbar-inner {
+	width: 80%;
+}
+.percent_90 .progressbar-inner {
+	width: 90%;
+}
+.percent_100 .progressbar-inner {
+	width: 100%;
+}
