@@ -1,205 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
 
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md. Mahsin-Ul-Islam - Software Developer & Educator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Md. Mahsin-Ul-Islam | Software Developer | Dhaka, Bangladesh</title>
-<meta name="description" content="I&#39;m a web &amp; software developer, primarily working with Java, PHP, JavaScript and Laravel, living in Dhaka, Bangladesh.">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
 
-<link rel="stylesheet" href="assets/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,700">
-<link rel="stylesheet" href="assets/css/main.css">
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-<link rel="canonical" href="https://mahsin.me/">
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-<link rel="icon" type="image/x-icon" href="images/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="assets/images/favicon/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="assets/images/favicon/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="assets/images/favicon/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="assets/images/favicon/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="assets/images/favicon/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="assets/images/favicon/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="assets/images/favicon/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="assets/images/favicon/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192"  href="assets/images/favicon/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png">
-<meta name="msapplication-TileImage" content="assets/images/favicon/ms-icon-144x144.png">
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  </head>
-  <body js-component="page">
-    <aside class="menu" js-component="menu">
-      <nav class="menu__nav nav">
-        
-        <ul class="nav__list nav__list--primary">
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link nav__list__link--active" href="/" title="">
-              Home
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link " href="#" title="">
-              About
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link " href="https://mahsin.wordpress.com/" title="">
-              Blog
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link " href="#" title="">
-              Projects
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link nav__list__link--highlight " href="#" title="">
-              Hire Me
-            </a>
-          </li>
-        </ul>
-        <ul class="nav__list nav__list--secondary">
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link" href="mailto:mahsin.islam@yahoo.com">
-              email
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link" href="https://twitter.com/islammahsin/" rel="nofollow" target="_blank">
-              twitter
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link" href="https://stackoverflow.com/users/3699965/mahsin" rel="nofollow" target="_blank">
-              stackoverflow
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link" href="https://github.com/mahsin-islam/" rel="nofollow" target="_blank">
-              github
-            </a>
-          </li>
-          <li class="nav__list__item" js-menu-item>
-            <a class="nav__list__link" href="https://www.codementor.io/mahsin" rel="nofollow" target="_blank">
-              codementor
-            </a>
-          </li>
-          <hr class="nav__list__divider" />
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
 
-        </ul>
-      </nav>
-    </aside>
-    <div class="page">
-      <div class="menu-trigger menu-trigger--fixed" title="Toggle the sidebar navigation menu" js-component="menuTrigger">
-  <button class="menu-trigger__button" type="button" name="menu-trigger" js-menu-trigger>
-    <img class="menu-trigger__icon menu-trigger__icon--open" src="assets/images/menu-icon.svg" alt="Open Menu">
-    <img class="menu-trigger__icon menu-trigger__icon--close" src="assets/images/close.svg" alt="Close Menu">
-  </button>
-</div>
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
 
-<div class="centered-container">
-  <article class="home-page">
-    <section class="home-page__profile-card">
-      <div class="profile-card">
-  <div class="profile-card__portrait" title="I'm a web & software developer, primarily working with Java, Android, JavaScript, PHP, WordPress and Laravel, living in Dhaka, Bangladesh.
-">
-    <img src="assets/images/mahsin.png" alt="Md.Mahsin-Ul-Islam - Software Developer" />
-  </div>
-  <div class="profile-card__details">
-    <h1 class="profile-card__title">Md.Mahsin-Ul-Islam</h1>
-    <h2 class="profile-card__subtitle">Software Developer</h2>
-  </div>
-</div>
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
 
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideInFromTop 1s ease;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .hero-buttons {
+            animation: zoomIn 1s ease 0.6s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #667eea;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: float 3s ease-in-out infinite;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: scale(1.05);
+            animation-play-state: paused;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #667eea;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 2rem;
+        }
+
+        .skill-tag {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation-play-state: paused;
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+            opacity: 0;
+        }
+
+        .project-card:hover .project-image::before {
+            animation: rotate 1s ease;
+            opacity: 1;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .project-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .blog-card:hover {
+            transform: perspective(1000px) rotateX(5deg) translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-date {
+            color: #667eea;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .blog-excerpt {
+            color: #666;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #667eea;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: #667eea;
+            width: 30px;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #667eea;
+        }
+
+        /* Enhanced Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        @keyframes slideInFromTop {
+            from {
+                opacity: 0;
+                transform: translateY(-100px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-left.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in-right.animated {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .scale-in.animated {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="container">
+            <div class="logo">Md Mahsin Ul Islam</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Md. Mahsin-Ul-Islam</h1>
+                <p>Software Developer & Educator from Dhaka, Bangladesh</p>
+                <p>Specialized in Java, JavaScript, React.js, Android Development, PHP & Laravel</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-outline">Hire Me</a>
+                </div>
+            </div>
+        </div>
     </section>
-    <section class="home-page__about">
-      <p>Hey, I&#39;m an independent web &amp; software developer from Dhaka, Bangladesh. I work primarily with <a href="http://oracle.com/">Java</a>, JavaScript, Android, PHP, WordPress, Laravel and <a href="https://www.android.com/">Mobile Apps</a>.</p>
 
-<p>Have a look through some of my <a href="https://github.com/mahsin-islam/">projects</a> and <a href="https://mahsin.wordpress.com/">blog posts</a>. Need help with an upcoming project or application? Learn a bit more <a href="#">about me</a> and then consider <a href="#">hiring me</a>.</p>
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">About Me</h2>
+            <div class="about-content">
+                <div class="about-image fade-in-left">
+                    <img src="https://avatars.githubusercontent.com/u/1625898?v=4" alt="Mahsin Islam"
+                        class="profile-img"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+                    <div
+                        style="display: none; width: 280px; height: 280px; border-radius: 50%; background: linear-gradient(45deg, #667eea, #764ba2); align-items: center; justify-content: center; color: white; font-size: 4rem; margin: 0 auto;">
+                        <i class="fas fa-user"></i>
+                    </div>
+                </div>
+                <div class="about-text fade-in-right">
+                    <h3>Independent Web & Software Developer</h3>
+                    <p>Hey there! I'm an independent web and software developer based in Dhaka, Bangladesh. With a
+                        passion for creating robust and scalable applications, I specialize in both frontend and backend
+                        development.</p>
 
+                    <p>I work primarily with Java for enterprise applications, JavaScript for dynamic web experiences,
+                        Android for mobile development, and PHP with frameworks like Laravel for backend solutions. I
+                        also have extensive experience with React.js development.</p>
+
+                    <p>As an educator, I share my knowledge through my YouTube channel "Mahsin The Educator" and
+                        actively contribute to the developer community through open-source projects and technical
+                        content on Medium.</p>
+
+                    <div class="skills scale-in">
+                        <span class="skill-tag">Java</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Android</span>
+                        <span class="skill-tag">PHP</span>
+                        <span class="skill-tag">Laravel</span>
+                        <!-- <span class="skill-tag">WordPress</span> -->
+                        <span class="skill-tag">React.js</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
-    <ul class="icons-list">
-  <li class="icons-list__item">
-    <a href="mailto:mahsin.islam@yahoo.com" rel="nofollow" target="_blank" title="Send me an email">
-      <i class="fa fa-envelope" aria-hidden="true"></i>
-      Email
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://github.com/mahsin-islam/" rel="nofollow" target="_blank"  title="Look through my Github profile">
-      <i class="fa fa-github" aria-hidden="true"></i>
-      Github
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://twitter.com/islammahsin/" rel="nofollow" target="_blank" title="Tweet me!">
-      <i class="fa fa-twitter" aria-hidden="true"></i>
-      Twitter
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://www.linkedin.com/in/mahsinislam/" rel="nofollow" target="_blank"  title="See my LinkedIn profile">
-      <i class="fa fa-linkedin" aria-hidden="true"></i>
-      LinkedIn
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://stackoverflow.com/users/3699965/mahsin" rel="nofollow" target="_blank" title="See my StackOverflow profile">
-      <i class="fa fa-stack-overflow" aria-hidden="true"></i>
-      Stack Overflow
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://www.bitbucket.org/mahsin" rel="nofollow" target="_blank" title="Visit my Bitbucket profile">
-      <i class="fa fa-bitbucket" aria-hidden="true"></i>
-      BitBucket
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://codepen.io/mahsin/" rel="nofollow" target="_blank" title="Visit my Codepen profile">
-      <i class="fa fa-codepen" aria-hidden="true"></i>
-      Codepen
-    </a>
-  </li>
-  <li class="icons-list__item">
-  <a href="https://www.codementor.io/mahsin" rel="nofollow" target="_blank" title="Visit my Code Mentor profile">
-      <i class="fa fa-code" aria-hidden="true"></i>
-      Code Mentor
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="https://www.trello.com/mahsin" rel="nofollow" target="_blank" title="Find me on Trello">
-      <i class="fa fa-trello" aria-hidden="true"></i>
-      Trello
-    </a>
-  </li>
-  <li class="icons-list__item">
-    <a href="skype:md.mahsin.islam" rel="nofollow" target="_blank" title="Call me on Skype">
-      <i class="fa fa-skype" aria-hidden="true"></i>
-      Skype
-    </a>
-  </li>
-</ul>
 
-  </article>
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fab fa-react"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Carousel Review React.js</h3>
+                        <p>A responsive carousel component for displaying reviews with smooth transitions and modern UI
+                            design.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">CSS3</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mahsin-islam/carousel-review-reactjs" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://carousel-review-reactjs.netlify.app/" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-</div>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fab fa-android"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Holiday Calendar Android</h3>
+                        <p>Android application using Material Calendar View and JSON to store Bangladesh holiday data
+                            with modern Material UI design.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Android</span>
+                            <span class="tech-tag">Material UI</span>
+                            <span class="tech-tag">JSON</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mahsin-islam/holyday-calendar-android-java" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-      <div class="elevator" js-component="elevator" js-args="{ offset: 500 }">
-        <i class="elevator__icon fa fa-angle-up" aria-hidden="true"></i>
-      </div>
-    </div>
-  </body>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Fresh Food Shop</h3>
+                        <p>Full-stack e-commerce website for fresh food delivery with React.js frontend and Node.js
+                            backend.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">React.js</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                            <span class="tech-tag">Express</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mahsin-islam/fresh-food-server" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-  <script src="assets/js/app.js"></script>
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>PDF Password Protection</h3>
+                        <p>Java application to encrypt unprotected PDFs with password using iText library for document
+                            security.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">iText</span>
+                            <span class="tech-tag">PDF Processing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mahsin-islam/PDF-Password-Protected-iText-Java" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="project-card animate-on-scroll">
+                    <div class="project-image">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Penguin Fashion</h3>
+                        <p>Responsive e-commerce landing page for fashion products built with Bootstrap 5 and modern CSS
+                            techniques.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML5</span>
+                            <span class="tech-tag">Bootstrap 5</span>
+                            <span class="tech-tag">CSS3</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/mahsin-islam/penguin-fashion" target="_blank">
+                                <i class="fab fa-github"></i> GitHub
+                            </a>
+                            <a href="https://mahsin-islam.github.io/penguin-fashion/" target="_blank">
+                                <i class="fas fa-external-link-alt"></i> Live Demo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+  
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Latest Blog Posts</h2>
+            <div class="blog-grid">
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">July 18, 2019</div>
+                        <h3>Encrypt Unprotected PDF with Password using iText in Java</h3>
+                        <p class="blog-excerpt">In this tutorial, we will learn how to use iText API to add a password
+                            in PDF and how to encrypt existing PDF to write and read data respectively. A comprehensive
+                            guide on PDF security with Java.</p>
+                        <a href="https://medium.com/@mahsin.islam/encrypt-unprotected-pdf-with-password-using-itext-in-java-d20addfba673"
+                            target="_blank" class="btn btn-primary">Read on Medium</a>
+                    </div>
+                </div>
+
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <i class="fab fa-cuttlefish"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">December 14, 2021</div>
+                        <h3>Learning Printf() in C/C++ Is Not Difficult At All!</h3>
+                        <p class="blog-excerpt">A detailed explanation of printf() function in C/C++ programming.
+                            Understanding format specifiers, memory addresses, and how the compiler processes printf
+                            arguments internally.</p>
+                        <a href="https://medium.com/@mahsin.islam/learning-printf-in-c-c-is-not-difficult-at-all-45049b05c310"
+                            target="_blank" class="btn btn-primary">Read on Medium</a>
+                    </div>
+                </div>
+
+                <div class="blog-card animate-on-scroll">
+                    <div class="blog-image">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-date">Recent</div>
+                        <h3>More Programming Tutorials</h3>
+                        <p class="blog-excerpt">Explore more of my technical articles and programming tutorials on
+                            Medium. Covering Java, C/C++, web development, and software engineering best practices.</p>
+                        <a href="https://medium.com/@mahsin.islam" target="_blank" class="btn btn-primary">View All
+                            Articles</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info fade-in-left">
+                    <h3>Let's Work Together</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Dhaka, Bangladesh</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>mahsin.islam@gmail.com</span>
+                    </div>
+                    <!-- <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+880 1XXXXXXXXX</span>
+                    </div> -->
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>github.com/mahsin-islam</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-medium"></i>
+                        <span>medium.com/@mahsin.islam</span>
+                    </div>
+                </div>
+
+                <div class="contact-form fade-in-right">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/mahsin-islam" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.youtube.com/@mahsintheeducator" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                </a>
+                <a href="https://www.facebook.com/mahsintheeducator/" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/mahsinislam/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Md. Mahsin-Ul-Islam. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Enhanced Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+
+                    // Add staggered animation for project cards and blog cards
+                    if (entry.target.classList.contains('projects-grid') ||
+                        entry.target.classList.contains('blog-grid')) {
+                        const cards = entry.target.querySelectorAll('.project-card, .blog-card');
+                        cards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('animated');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.animate-on-scroll, .fade-in-left, .fade-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Observe grid containers for staggered animations
+        document.querySelectorAll('.projects-grid, .blog-grid').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Form submission with animation
+        document.querySelector('form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Add loading animation to button
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Sending...';
+            submitBtn.style.background = '#28a745';
+
+            // Simulate sending delay
+            setTimeout(() => {
+                submitBtn.textContent = 'Message Sent!';
+                submitBtn.style.background = '#28a745';
+
+                // Reset form and button after delay
+                setTimeout(() => {
+                    this.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                }, 2000);
+            }, 1500);
+        });
+
+        // Enhanced Active Navigation on Scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Header background change on scroll
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Add typing animation to hero title
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            function typing() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(typing, speed);
+                }
+            }
+            typing();
+        }
+
+        // Initialize typing animation after page load
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero-content h1');
+            const originalText = heroTitle.textContent;
+            setTimeout(() => {
+                typeWriter(heroTitle, originalText, 80);
+            }, 1000);
+        });
+
+        // Add parallax effect to hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.hero');
+            const speed = 0.5;
+
+            parallaxElements.forEach(element => {
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Add hover sound effect simulation (visual feedback)
+        document.querySelectorAll('.btn, .project-card, .blog-card').forEach(element => {
+            element.addEventListener('mouseenter', function () {
+                this.style.transform += ' scale(1.05)';
+            });
+
+            element.addEventListener('mouseleave', function () {
+                this.style.transform = this.style.transform.replace(' scale(1.05)', '');
+            });
+        });
+
+        // Add skill tags animation on hover
+        document.querySelectorAll('.skill-tag').forEach((tag, index) => {
+            tag.style.animationDelay = `${index * 0.1}s`;
+            tag.addEventListener('mouseenter', function () {
+                this.style.transform = 'scale(1.1) rotate(5deg)';
+                this.style.boxShadow = '0 5px 15px rgba(102, 126, 234, 0.3)';
+            });
+
+            tag.addEventListener('mouseleave', function () {
+                this.style.transform = 'scale(1) rotate(0deg)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Add loading animation for external links
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            link.addEventListener('click', function (e) {
+                // Add a subtle loading effect
+                this.style.opacity = '0.7';
+                setTimeout(() => {
+                    this.style.opacity = '1';
+                }, 1000);
+            });
+        });
+
+        // Initialize all animations when page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add initial animation classes
+            setTimeout(() => {
+                document.body.classList.add('loaded');
+            }, 500);
+        });
+    </script>
+</body>
 
 </html>
