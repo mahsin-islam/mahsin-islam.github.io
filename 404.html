@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 — Page not found | Md. Mahsin-Ul-Islam</title>
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0B1220" />
+    <style>
+      :root {
+        --ink: #0b1220;
+        --ink-2: #0f1830;
+        --hairline: #24304a;
+        --text: #edeff5;
+        --text-dim: #9aa6c0;
+        --brass: #cba135;
+        --mono: "JetBrains Mono", ui-monospace, monospace;
+        --serif: Georgia, serif;
+      }
+      [data-theme="light"] {
+        --ink: #f2eee1;
+        --ink-2: #fbf9f2;
+        --hairline: #d9d0b4;
+        --text: #2a2416;
+        --text-dim: #5c5340;
+        --brass: #8a6a1e;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        background: var(--ink);
+        color: var(--text);
+        font-family: system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 24px;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+      .code {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--brass);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+      h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(24px, 4vw, 36px); margin-bottom: 12px; }
+      p { color: var(--text-dim); max-width: 420px; margin: 0 auto 24px; line-height: 1.6; }
+      .links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+      .links a {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--ink);
+        background: var(--brass);
+        padding: 10px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .links a.ghost {
+        background: transparent;
+        color: var(--brass);
+        border: 1px solid var(--brass);
+      }
+    </style>
+    <script>
+      try {
+        var t = localStorage.getItem("theme");
+        if (t === "light") document.documentElement.setAttribute("data-theme", "light");
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div>
+      <div class="code">Error / 404</div>
+      <h1>This page moved or never existed</h1>
+      <p>
+        The portfolio was rebuilt (v4) — old links land here. Use the links
+        below to find what you were looking for.
+      </p>
+      <div class="links">
+        <a href="/">Home</a>
+        <a href="/work" class="ghost">Work &amp; R&amp;D</a>
+        <a href="/blog" class="ghost">Blog</a>
+        <a href="/services" class="ghost">Services</a>
+      </div>
+    </div>
+  </body>
+</html>

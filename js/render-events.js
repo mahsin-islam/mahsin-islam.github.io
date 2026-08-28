@@ -81,6 +81,13 @@ function renderEventCard(event, idx) {
        </button>`
     : '';
 
+  // External / anchor link button
+  const linkButton = event.link
+    ? `<a class="event-link-btn" href="${escapeHtml(event.link)}" ${event.link.startsWith('http') ? 'target="_blank" rel="noopener"' : ''}>
+        <i class="fas fa-arrow-right"></i> Details
+       </a>`
+    : '';
+
   return `<article class="event-card reveal" data-event-id="${event.id}" style="animation-delay: ${idx * 100}ms">
     <div class="event-head">
       <div class="event-date">${formatDate(event.date)}</div>
@@ -94,7 +101,7 @@ function renderEventCard(event, idx) {
         <span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(event.location)}</span>
       </div>
       <p class="event-description">${escapeHtml(event.description)}</p>
-      ${certButton}
+      ${certButton}${linkButton}
     </div>
   </article>`;
 }
@@ -112,7 +119,10 @@ function getTypeIcon(type) {
 }
 
 function formatDate(dateStr) {
+  if (!dateStr) return '';
+  if (/^\d{4}$/.test(String(dateStr))) return String(dateStr); // year-only dates stay as-is
   const date = new Date(dateStr);
+  if (isNaN(date.getTime())) return String(dateStr);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -158,6 +168,10 @@ function openCertificatePopup(certificateUrl, title) {
   img.alt = title;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
+  if (window.__a11y) {
+    window.__a11y.saveFocus();
+    window.__a11y.focusFirst(modal.querySelector('.modal-panel'));
+  }
 }
 
 function closeCertificatePopup() {
@@ -165,6 +179,7 @@ function closeCertificatePopup() {
   if (!modal) return;
   modal.classList.remove('open');
   document.body.style.overflow = '';
+  if (window.__a11y) window.__a11y.restoreFocus();
 }
 
 // Initialize on DOM ready

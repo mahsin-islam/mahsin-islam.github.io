@@ -1,0 +1,35 @@
+{
+  "notice": {
+    "enabled": true,
+    "id": "notice-2026-open",
+    "severity": "info",
+    "text": "Open to select collaborations, consulting & speaking — AI/ML, FinTech, EdTech, automation.",
+    "link": "#booking",
+    "linkLabel": "Book a call",
+    "start": "2026-01-01",
+    "end": "2027-12-31",
+    "dismissible": true
+  },
+  "featuredVideo": {
+    "id": "",
+    "title": "Featured programming tutorial",
+    "channelUrl": "https://www.youtube.com/@mahsintheeducator"
+  },
+  "brand": {
+    "name": "Md. Mahsin-Ul-Islam",
+    "nickname": "Riaydh",
+    "location": "Dhaka, Bangladesh",
+    "email": "mahsin.islam@gmail.com",
+    "whatsapp": "https://wa.me/8801913086401",
+    "facebookProfile": "https://www.facebook.com/riaydh/",
+    "facebookPage": "https://www.facebook.com/mahsintheeducator/",
+    "dazzleoit": "https://www.facebook.com/dazzleoit/",
+    "linkedin": "https://www.linkedin.com/in/mahsinislam/",
+    "medium": "https://medium.com/@mahsin.islam",
+    "youtube": "https://www.youtube.com/@mahsintheeducator",
+    "github": "https://github.com/mahsin-islam",
+    "scholar": "https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4",
+    "playStore": "https://play.google.com/store/apps/developer?id=DazzLeoIT"
+  },
+  "lifestyle": []
+}

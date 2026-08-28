@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      /* Pre-paint theme: prevents dark flash for light-mode users */
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>
       Md. Mahsin-Ul-Islam — Software Engineer, Researcher &amp; Educator |
       Dhaka, Bangladesh
@@ -28,7 +39,7 @@
     <meta property="og:url" content="https://mahsin-islam.github.io/" />
     <meta
       property="og:image"
-      content="https://mahsin-islam.github.io/assets/profile.png"
+      content="https://mahsin-islam.github.io/assets/og-image.jpg"
     />
     <meta property="og:site_name" content="Md. Mahsin-Ul-Islam" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -38,7 +49,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://mahsin-islam.github.io/assets/profile.png"
+      content="https://mahsin-islam.github.io/assets/og-image.jpg"
     />
 
     <script type="application/ld+json">
@@ -47,7 +58,7 @@
         "@type": "Person",
         "name": "Md. Mahsin-Ul-Islam",
         "url": "https://mahsin-islam.github.io/",
-        "image": "https://mahsin-islam.github.io/assets/profile.png",
+        "image": "https://mahsin-islam.github.io/assets/profile.jpg",
         "jobTitle": "Software Programmer, ICT Division",
         "worksFor": {
           "@type": "Organization",
@@ -85,7 +96,11 @@
           "https://www.youtube.com/@mahsintheeducator",
           "https://www.linkedin.com/in/mahsinislam/",
           "https://medium.com/@mahsin.islam",
-          "https://www.facebook.com/mahsintheeducator/"
+          "https://www.facebook.com/riaydh/",
+          "https://www.facebook.com/mahsintheeducator/",
+          "https://www.facebook.com/dazzleoit/",
+          "https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4",
+          "https://play.google.com/store/apps/developer?id=DazzLeoIT"
         ]
       }
     </script>
@@ -2248,35 +2263,6 @@
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
         border-color: var(--brass-soft);
       }
-      .event-image {
-        height: 160px;
-        background: linear-gradient(135deg, var(--ink-3), var(--ink));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-      }
-      .event-image i {
-        font-size: 48px;
-        color: var(--brass);
-        opacity: 0.8;
-      }
-      .event-content {
-        padding: 20px;
-      }
-      .event-content h3 {
-        font-family: var(--serif);
-        font-size: 18px;
-        font-weight: 500;
-        color: var(--text);
-        margin-bottom: 8px;
-      }
-      .event-content p {
-        color: var(--text-dim);
-        font-size: 14px;
-        line-height: 1.5;
-        margin-bottom: 16px;
-      }
       .event-meta {
         display: flex;
         gap: 12px;
@@ -2290,156 +2276,174 @@
         text-transform: uppercase;
         letter-spacing: 0.06em;
       }
-      .event-view-btn {
-        width: 100%;
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--ink);
-        background: var(--brass);
-        border: none;
-        padding: 10px 16px;
-        border-radius: 6px;
-        cursor: pointer;
+      /* ===== DATA-DRIVEN EVENTS (js/render-events.js) ===== */
+      .event-media {
+        height: 150px;
+        background: var(--ink-3);
         display: flex;
         align-items: center;
         justify-content: center;
+        overflow: hidden;
+        position: relative;
+      }
+      .event-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .event-media--certificate,
+      .event-media--placeholder {
+        flex-direction: column;
         gap: 8px;
+      }
+      .certificate-preview {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        color: var(--brass);
+        font-size: 26px;
+      }
+      .certificate-preview span,
+      .placeholder-hint {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: var(--text-faint);
+      }
+      .placeholder-icon {
+        font-size: 30px;
+        color: var(--brass);
+        opacity: 0.8;
+      }
+      .event-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--hairline-soft);
+      }
+      .event-body {
+        padding: 18px 16px 20px;
+      }
+      .event-body h3 {
+        font-family: var(--serif);
+        font-size: 16.5px;
+        font-weight: 500;
+        color: var(--text);
+        line-height: 1.35;
+        margin-bottom: 10px;
+      }
+      .event-body .event-description {
+        color: var(--text-dim);
+        font-size: 13px;
+        line-height: 1.55;
+        margin: 10px 0 14px;
+      }
+      .cert-btn,
+      .event-link-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font-family: var(--mono);
+        font-size: 11.5px;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        cursor: pointer;
         transition: opacity 0.2s;
       }
-      .event-view-btn:hover {
+      .cert-btn {
+        color: var(--ink);
+        background: var(--brass);
+        border: none;
+        font-weight: 600;
+        margin-right: 8px;
+      }
+      .cert-btn:hover {
         opacity: 0.9;
       }
+      .event-link-btn {
+        color: var(--teal);
+        border: 1px solid var(--hairline);
+        background: transparent;
+      }
+      .event-link-btn:hover {
+        border-color: var(--teal);
+      }
 
-      /* Event Modal */
-      .event-modal {
+      /* certificate popup modal (render-events.js) */
+      .modal {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(4px);
         display: none;
         align-items: center;
         justify-content: center;
         z-index: 1000;
-        opacity: 0;
-        transition: opacity 0.3s;
+        padding: 24px;
       }
-      .event-modal.open {
+      .modal.open {
         display: flex;
-        opacity: 1;
       }
-      .event-modal-content {
-        background: var(--ink);
-        border: 1px solid var(--hairline);
-        border-radius: 16px;
-        max-width: 600px;
-        width: 90%;
-        max-height: 80vh;
-        overflow-y: auto;
+      .modal-backdrop {
+        position: absolute;
+        inset: 0;
+      }
+      .modal-panel {
         position: relative;
-      }
-      .event-modal-header {
-        padding: 24px;
-        border-bottom: 1px solid var(--hairline);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .event-modal-header h3 {
-        font-family: var(--serif);
-        font-size: 20px;
-        color: var(--text);
-      }
-      .event-modal-close {
-        background: none;
-        border: none;
-        color: var(--text-dim);
-        font-size: 24px;
-        cursor: pointer;
-        padding: 8px;
-        line-height: 1;
-      }
-      .event-modal-close:hover {
-        color: var(--brass);
-      }
-      .event-modal-body {
-        padding: 24px;
-      }
-      .event-modal-image {
-        width: 100%;
-        min-height: 200px;
         background: var(--ink-2);
-        border-radius: 8px;
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        max-width: 760px;
+        width: 100%;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding: 18px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      }
+      .modal-close {
+        position: sticky;
+        top: 0;
+        float: right;
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1px solid var(--hairline);
+        background: var(--ink);
+        color: var(--text);
+        cursor: pointer;
+        font-size: 14px;
+        z-index: 2;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 16px;
-        border: 1px dashed var(--hairline);
       }
-      .event-modal-image img {
+      .modal-close:hover {
+        border-color: var(--brass);
+        color: var(--brass);
+      }
+      .modal-content {
+        clear: both;
+        text-align: center;
+      }
+      .modal-content img {
         max-width: 100%;
-        max-height: 300px;
         border-radius: 8px;
+        display: inline-block;
       }
-      .event-modal-image i {
-        font-size: 48px;
-        color: var(--text-faint);
-      }
-      .event-modal-description {
-        color: var(--text-dim);
-        line-height: 1.6;
-        margin-bottom: 16px;
-      }
-      .event-modal-details {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        margin-top: 16px;
-      }
-      .event-detail-item {
-        padding: 12px;
-        background: var(--ink-2);
-        border-radius: 8px;
-      }
-      .event-detail-label {
-        font-family: var(--mono);
-        font-size: 11px;
-        color: var(--text-faint);
-        text-transform: uppercase;
-        margin-bottom: 4px;
-      }
-      .event-detail-value {
-        color: var(--text);
-        font-size: 14px;
-      }
+
       .ve-showcase {
         border: 1px solid var(--hairline);
         border-radius: 12px;
         overflow: hidden;
         background: var(--ink-3);
         text-align: center;
-      }
-      .ve-showcase .ve-thumb {
-        height: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--brass);
-        font-size: 36px;
-      }
-      .ve-showcase .ve-info {
-        padding: 20px;
-      }
-      .ve-showcase .ve-info h4 {
-        font-size: 15px;
-        font-weight: 500;
-        margin-bottom: 6px;
-      }
-      .ve-showcase .ve-info p {
-        font-family: var(--mono);
-        font-size: 12px;
-        color: var(--text-faint);
       }
 
       /* Service highlights mini-section */
@@ -2626,6 +2630,142 @@
         border-color: var(--brass);
         background: color-mix(in srgb, var(--brass) 8%, transparent);
       }
+
+      /* ===== SETTINGS-DRIVEN NOTICE BAR (data/site-config.json) ===== */
+      .site-notice {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        padding: 10px 48px;
+        font-family: var(--mono);
+        font-size: 12.5px;
+        text-align: center;
+        position: relative;
+        z-index: 120;
+        border-bottom: 1px solid var(--hairline-soft);
+        background: color-mix(in srgb, var(--brass) 12%, var(--ink-2));
+        color: var(--text);
+      }
+      .site-notice a {
+        color: var(--brass);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .site-notice .notice-close {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-faint);
+        cursor: pointer;
+        font-size: 15px;
+        line-height: 1;
+        padding: 4px;
+      }
+      .site-notice .notice-close:hover {
+        color: var(--brass);
+      }
+      .site-notice.notice-warning {
+        background: color-mix(in srgb, #b3541e 14%, var(--ink-2));
+      }
+      .site-notice.notice-success {
+        background: color-mix(in srgb, var(--teal) 14%, var(--ink-2));
+      }
+
+      /* ===== FEATURED VIDEO FACADE (click-to-play) ===== */
+      .video-facade {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: var(--ink-3);
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+        display: block;
+      }
+      .video-facade img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .video-facade .facade-play {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .video-facade .facade-play span {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(203, 161, 53, 0.92);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        transition: transform 0.2s ease;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      }
+      .video-facade:hover .facade-play span {
+        transform: scale(1.08);
+      }
+      .video-facade iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        display: block;
+      }
+      .video-facade--fallback {
+        aspect-ratio: auto;
+        min-height: 170px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+      }
+      .video-facade--fallback .facade-play {
+        position: static;
+        margin-top: 22px;
+      }
+      .video-facade--fallback .facade-play span {
+        background: transparent;
+        color: var(--brass);
+        box-shadow: none;
+      }
+      .facade-fallback-text {
+        font-family: var(--mono);
+        font-size: 12.5px;
+        color: var(--text-dim);
+        padding: 18px 22px 26px;
+        line-height: 1.7;
+      }
+      .facade-fallback-text code {
+        background: var(--ink-3);
+        border: 1px solid var(--hairline);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: var(--teal);
+      }
+
+      /* ===== GSAP-CDN FAILURE FALLBACK (content must never stay hidden) ===== */
+      html.no-gsap .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      html.no-gsap .entry.reveal:not([data-revealed]) {
+        animation: none;
+      }
+      html.no-gsap .skill-bar-fill {
+        width: var(--pct);
+      }
     </style>
 
     <!-- Google tag (gtag.js) -->
@@ -2658,7 +2798,7 @@
       })(window, document, "clarity", "script", "xtj7i8cyjj");
     </script>
   </head>
-  <body data-theme="dark">
+  <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <div class="ambient-bg">
       <div class="orb orb-a"></div>
@@ -2669,7 +2809,7 @@
 
     <!-- Case Study Detail Modal -->
     <div class="cs-modal-overlay" id="csModalOverlay">
-      <div class="cs-modal" id="csModal">
+      <div class="cs-modal" id="csModal" role="dialog" aria-modal="true" aria-label="Case study details">
         <button class="cs-modal-close" id="csModalClose" aria-label="Close">
           &times;
         </button>
@@ -2688,6 +2828,7 @@
           <li><a href="work.html">Work &amp; R&amp;D</a></li>
           <li><a href="blog.html">Blog</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
           <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <div class="nav-right">
@@ -2704,7 +2845,7 @@
               />
               <button class="search-close" id="searchClose">&times;</button>
             </div>
-            <div class="search-results" id="searchResults"></div>
+            <div class="search-results" id="searchResults" aria-live="polite"></div>
           </div>
           <button
             class="theme-toggle"
@@ -2825,7 +2966,7 @@
                   <span class="portrait-corner tl"></span
                   ><span class="portrait-corner br"></span>
                   <img
-                    src="assets/profile.png"
+                    src="assets/profile.jpg"
                     alt="Portrait of Md. Mahsin-Ul-Islam"
                   />
                 </div>
@@ -2971,60 +3112,8 @@
             I've participated in. Each representing a milestone in my journey.
           </p>
 
-          <div class="events-grid reveal">
-            <!-- Programming Contest -->
-            <div class="event-card" data-event="programming-contest">
-              <div class="event-image">
-                <i class="fas fa-code"></i>
-              </div>
-              <div class="event-content">
-                <h3>Programming Contest Participation</h3>
-                <p>Competitive programming contests and hackathons</p>
-                <div class="event-meta">
-                  <span class="event-date">Various</span>
-                  <span class="event-category">Technical</span>
-                </div>
-                <button class="event-view-btn" data-event="programming-contest">
-                  <i class="fas fa-certificate"></i> View Certificate
-                </button>
-              </div>
-            </div>
-
-            <!-- Certificate Ceremony -->
-            <div class="event-card" data-event="certificate-ceremony">
-              <div class="event-image">
-                <i class="fas fa-award"></i>
-              </div>
-              <div class="event-content">
-                <h3>Achievement Ceremonies</h3>
-                <p>Certificate award ceremonies and recognition events</p>
-                <div class="event-meta">
-                  <span class="event-date">Ongoing</span>
-                  <span class="event-category">Academic</span>
-                </div>
-                <button class="event-view-btn" data-event="certificate-ceremony">
-                  <i class="fas fa-certificate"></i> View Certificate
-                </button>
-              </div>
-            </div>
-
-            <!-- Professional Events -->
-            <div class="event-card" data-event="professional-events">
-              <div class="event-image">
-                <i class="fas fa-users"></i>
-              </div>
-              <div class="event-content">
-                <h3>Professional Events</h3>
-                <p>Conferences, workshops, and networking events</p>
-                <div class="event-meta">
-                  <span class="event-date">Various</span>
-                  <span class="event-category">Professional</span>
-                </div>
-                <button class="event-view-btn" data-event="professional-events">
-                  <i class="fas fa-certificate"></i> View Certificate
-                </button>
-              </div>
-            </div>
+          <div class="events-grid reveal" id="events-list">
+            <noscript>Enable JavaScript to view events and milestones.</noscript>
           </div>
         </div>
       </section>
@@ -3081,24 +3170,23 @@
               </div>
             </div>
           </div>
-          <div class="ve-showcase reveal" style="margin-top: 20px">
-            <div class="video-wrapper">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                title="Programming Tutorial - YouTube Video"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-              </iframe>
-            </div>
-            <div class="ve-info">
-              <p style="margin-top: 16px; font-size: 14px; color: var(--text-dim);">
-                <i class="fas fa-info-circle"></i>
-                Watch more tutorials at <a href="https://www.youtube.com/@mahsintheeducator" target="_blank" rel="noopener" style="color: var(--brass);"><strong>youtube.com/@mahsintheeducator</strong></a>
+          <div class="ve-showcase reveal" style="margin-top: 20px" data-config="featuredVideo">
+            <a
+              class="video-facade video-facade--fallback"
+              href="https://www.youtube.com/@mahsintheeducator"
+              target="_blank"
+              rel="noopener"
+            >
+              <div class="facade-play"><span><i class="fab fa-youtube"></i></span></div>
+              <p class="facade-fallback-text">
+                <i class="fas fa-info-circle"></i> Featured tutorial slot — set
+                your video ID in
+                <code>data/site-config.json</code>, or watch all tutorials at
+                <strong style="color: var(--brass)"
+                  >youtube.com/@mahsintheeducator</strong
+                >
               </p>
-            </div>
+            </a>
           </div>
         </div>
       </section>
@@ -3152,6 +3240,65 @@
               </div>
             </li>
           </ul>
+          <p style="margin-top: 18px; font-family: var(--mono); font-size: 12.5px;">
+            <a
+              href="https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--teal); text-decoration: none"
+              ><i class="fas fa-graduation-cap"></i> Full publication record on
+              Google Scholar →</a
+            >
+          </p>
+        </div>
+      </section>
+
+      <!-- AI / ML / APPLIED RESEARCH -->
+      <section id="ai-lab">
+        <div class="wrap">
+          <div class="eyebrow">AI · ML · Applied Research</div>
+          <h2 class="reveal">Where research meets production</h2>
+          <p class="section-lede reveal">
+            Peer-reviewed work in quantum computing and medical machine
+            learning — plus the AI-assisted automation systems I build for real
+            clients.
+          </p>
+          <div class="proof-grid">
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fas fa-microscope"></i></div>
+              <h3>Quantum &amp; medical ML research</h3>
+              <p>
+                Hybrid quantum framework for Shor's-algorithm noise assessment
+                (SCIRP JQIS, Dec 2025) and a robust ensemble model for cervical
+                cancer detection (IEEE IETCSE 2025).
+              </p>
+              <a
+                href="https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4"
+                target="_blank"
+                rel="noopener"
+                >View publications →</a
+              >
+            </div>
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fas fa-robot"></i></div>
+              <h3>AI-assisted client automation</h3>
+              <p>
+                WhatsApp AI + CRM pipeline that routes and tracks immigration
+                leads end-to-end without human hand-off — shipped for a
+                Canadian law firm.
+              </p>
+              <a href="#work">Read the case study →</a>
+            </div>
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fas fa-flask"></i></div>
+              <h3>Applied AI on the bench</h3>
+              <p>
+                Ongoing R&amp;D: applied AI/ML integrations, offline-first
+                architecture, and agentic-style automation experiments.
+              </p>
+              <a href="#work">What's on the bench →</a>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -3479,23 +3626,107 @@
         </div>
       </section>
 
+      <!-- APPS & PLAY STORE -->
+      <section id="apps" style="padding: 60px 0">
+        <div class="wrap">
+          <div class="eyebrow">Mobile apps</div>
+          <h2 class="reveal">Apps on Google Play</h2>
+          <p class="section-lede reveal">
+            Published under <strong style="color: var(--brass)">DazzLeoIT</strong>
+            — the product lab where my mobile experiments ship.
+          </p>
+          <div
+            class="apps-strip reveal"
+            style="display: flex; flex-wrap: wrap; gap: 16px; align-items: center"
+          >
+            <a
+              href="https://play.google.com/store/apps/developer?id=DazzLeoIT"
+              target="_blank"
+              rel="noopener"
+              style="display: inline-block"
+            >
+              <img
+                src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                alt="Get it on Google Play"
+                loading="lazy"
+                style="height: 60px; display: block; filter: grayscale(0.15)"
+              />
+            </a>
+            <a
+              href="https://www.facebook.com/dazzleoit/"
+              target="_blank"
+              rel="noopener"
+              class="btn btn-ghost"
+              ><i class="fab fa-facebook"></i> DazzleoIT on Facebook</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- LIFESTYLE (settings-driven — hidden until data exists) -->
+      <section id="lifestyle" data-config-section="lifestyle" style="display: none">
+        <div class="wrap">
+          <div class="eyebrow">Beyond the screen</div>
+          <h2 class="reveal">Life, hobbies &amp; interests</h2>
+          <p class="section-lede reveal">
+            The person behind the builds. Add hobbies and interests in
+            <code style="font-family: var(--mono); color: var(--brass)"
+              >data/site-config.json</code
+            >
+            → <code style="font-family: var(--mono); color: var(--brass)">lifestyle</code>.
+          </p>
+          <div class="cap-grid reveal" data-config="lifestyle"></div>
+        </div>
+      </section>
+
       <!-- SOCIAL PROOF -->
       <section id="proof">
         <div class="wrap">
           <div class="eyebrow">Elsewhere &amp; endorsed</div>
           <h2 class="reveal">Find me, or hear from past collaborators</h2>
           <p class="section-lede reveal">
-            Connect a Google Business Profile to pull real reviews here — this
-            section should never show invented testimonials.
+            Connect on every platform — profiles, publications, and products.
+            No invented testimonials, ever: real reviews will join once the
+            Google Business Profile is linked.
           </p>
           <div class="proof-grid">
             <div class="proof-card reveal">
+              <div class="p-icon"><i class="fab fa-youtube"></i></div>
+              <h3>YouTube — Mahsin The Educator</h3>
+              <p>Programming tutorials and project walkthroughs.</p>
+              <a
+                href="https://www.youtube.com/@mahsintheeducator"
+                target="_blank"
+                rel="noopener"
+                >Subscribe →</a
+              >
+            </div>
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fab fa-linkedin"></i></div>
+              <h3>LinkedIn</h3>
+              <p>Professional network, career history, and updates.</p>
+              <a
+                href="https://www.linkedin.com/in/mahsinislam/"
+                target="_blank"
+                rel="noopener"
+                >Connect →</a
+              >
+            </div>
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fab fa-github"></i></div>
+              <h3>GitHub</h3>
+              <p>Open repositories and live project activity.</p>
+              <a
+                href="https://github.com/mahsin-islam"
+                target="_blank"
+                rel="noopener"
+                >Follow →</a
+              >
+            </div>
+            <div class="proof-card reveal">
               <div class="p-icon"><i class="fab fa-facebook"></i></div>
               <h3>Facebook — Mahsin The Educator</h3>
-              <p>
-                Community updates and teaching content, including the PMBA
-                alumni group.
-              </p>
+              <p>Community updates and teaching content.</p>
               <a
                 href="https://www.facebook.com/mahsintheeducator/"
                 target="_blank"
@@ -3504,26 +3735,25 @@
               >
             </div>
             <div class="proof-card reveal">
-              <div class="p-icon"><i class="fab fa-google"></i></div>
-              <h3>Google reviews</h3>
-              <div class="stars placeholder-note">
-                — connect Google Business Profile —
-              </div>
-              <p>
-                Once a Business Profile is linked, real client reviews display
-                here automatically. No reviews are invented in the meantime.
-              </p>
-              <a href="#" target="_blank" rel="noopener">Leave a review →</a>
-            </div>
-            <div class="proof-card reveal">
-              <div class="p-icon"><i class="fab fa-youtube"></i></div>
-              <h3>YouTube — subscriber community</h3>
-              <p>Ongoing programming tutorials and project walkthroughs.</p>
+              <div class="p-icon"><i class="fas fa-graduation-cap"></i></div>
+              <h3>Google Scholar</h3>
+              <p>Citations and the peer-reviewed publication record.</p>
               <a
-                href="https://www.youtube.com/@mahsintheeducator"
+                href="https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4"
                 target="_blank"
                 rel="noopener"
-                >Subscribe →</a
+                >View profile →</a
+              >
+            </div>
+            <div class="proof-card reveal">
+              <div class="p-icon"><i class="fab fa-google-play"></i></div>
+              <h3>DazzLeoIT — Google Play</h3>
+              <p>Startup lab: mobile apps and products in the store.</p>
+              <a
+                href="https://play.google.com/store/apps/developer?id=DazzLeoIT"
+                target="_blank"
+                rel="noopener"
+                >See apps →</a
               >
             </div>
           </div>
@@ -3750,44 +3980,32 @@
             aria-label="Facebook"
             ><i class="fab fa-facebook"></i
           ></a>
+          <a
+            href="https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4"
+            target="_blank"
+            rel="noopener"
+            aria-label="Google Scholar"
+            ><i class="fas fa-graduation-cap"></i
+          ></a>
+          <a
+            href="https://play.google.com/store/apps/developer?id=DazzLeoIT"
+            target="_blank"
+            rel="noopener"
+            aria-label="Google Play"
+            ><i class="fab fa-google-play"></i
+          ></a>
         </div>
       </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/render-case-studies.js"></script>
+    <script src="js/render-site-config.js"></script>
+    <script src="js/render-events.js"></script>
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-
-      /* mobile nav */
-      const mtoggle = document.getElementById("mobileToggle");
-      const links = document.getElementById("navLinks");
-      mtoggle.addEventListener("click", () => {
-        const open = links.classList.toggle("open");
-        mtoggle.setAttribute("aria-expanded", open);
-      });
-      links.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          links.classList.remove("open");
-          mtoggle.setAttribute("aria-expanded", "false");
-        }),
-      );
-
-      /* theme toggle */
-      const themeToggle = document.getElementById("themeToggle");
-      const body = document.body;
-      function applyTheme(t) {
-        body.setAttribute("data-theme", t);
-        localStorage.setItem("theme", t);
-      }
-      const saved = localStorage.getItem("theme");
-      applyTheme(saved || "dark"); // dark by default, as requested
-      themeToggle.addEventListener("click", () => {
-        applyTheme(
-          body.getAttribute("data-theme") === "dark" ? "light" : "dark",
-        );
-      });
+      /* year / theme / mobile nav are handled by js/common.js */
 
       /* reduced motion check */
       const reduceMotion = window.matchMedia(
@@ -3798,10 +4016,17 @@
         navigator.serviceWorker.register("service-worker.js");
       }
 
-      gsap.registerPlugin(ScrollTrigger);
+      const hasGsap =
+        typeof window.gsap !== "undefined" &&
+        typeof window.ScrollTrigger !== "undefined";
+      if (!hasGsap) document.documentElement.classList.add("no-gsap");
+
+      if (hasGsap) {
+        gsap.registerPlugin(ScrollTrigger);
+      }
 
       /* hero entrance timeline */
-      if (!reduceMotion) {
+      if (hasGsap && !reduceMotion) {
         gsap
           .timeline({ defaults: { ease: "power3.out" } })
           .from("#heroStatement", { opacity: 0, y: 24, duration: 0.7 })
@@ -3830,7 +4055,7 @@
             },
             0.15,
           );
-      } else {
+      } else if (hasGsap) {
         gsap.set(["#heroStatement", ".tilt-wrap"], { opacity: 1 });
       }
 
@@ -3838,8 +4063,11 @@
       function initScrollReveals(root = document) {
         const targets = root.querySelectorAll(".reveal:not([data-revealed])");
         targets.forEach((t) => t.setAttribute("data-revealed", "1"));
-        if (reduceMotion) {
-          gsap.set(targets, { opacity: 1, y: 0 });
+        if (reduceMotion || !hasGsap) {
+          targets.forEach((t) => {
+            t.style.opacity = "1";
+            t.style.transform = "none";
+          });
           return;
         }
         ScrollTrigger.batch(targets, {
@@ -3859,12 +4087,17 @@
         initScrollReveals();
         ScrollTrigger.refresh();
       });
+      document.addEventListener("events:rendered", () => {
+        initScrollReveals();
+        if (hasGsap) ScrollTrigger.refresh();
+      });
 
       /* portrait cursor tilt */
       const tiltWrap = document.querySelector(".tilt-wrap");
       const portrait = document.getElementById("portraitCard");
       if (
         tiltWrap &&
+        hasGsap &&
         !reduceMotion &&
         window.matchMedia("(hover:hover)").matches
       ) {
@@ -4003,6 +4236,8 @@
         gallery.innerHTML = galleryHtml;
         overlay.classList.add("open");
         document.body.style.overflow = "hidden";
+        window.__a11y.saveFocus();
+        window.__a11y.focusFirst(document.getElementById("csModal"));
 
         const slide = gallery.querySelector("[data-cs-gallery]");
         if (slide) {
@@ -4038,6 +4273,7 @@
       function closeCaseStudyModal() {
         document.getElementById("csModalOverlay").classList.remove("open");
         document.body.style.overflow = "";
+        window.__a11y.restoreFocus();
       }
 
       /* ===== SEARCH ===== */
@@ -4216,12 +4452,15 @@
       (function visitorCounter() {
         const el = document.getElementById("visitorCount");
         const key = "mahsin-v3-visits";
-        let count = parseInt(localStorage.getItem(key), 10) || 0;
-        if (!sessionStorage.getItem("visitor-counted")) {
-          count++;
-          localStorage.setItem(key, count);
-          sessionStorage.setItem("visitor-counted", "1");
-        }
+        let count = 0;
+        try {
+          count = parseInt(localStorage.getItem(key), 10) || 0;
+          if (!sessionStorage.getItem("visitor-counted")) {
+            count++;
+            localStorage.setItem(key, count);
+            sessionStorage.setItem("visitor-counted", "1");
+          }
+        } catch (e) {}
         el.textContent = count;
         el.style.opacity = "1";
       })();
@@ -4250,7 +4489,7 @@ if (nlForm) {
       });
       
       // 4. Success state
-      btn.textContent = "Subscribed! Check inbox.";
+      btn.textContent = "Almost done — check your inbox";
       document.getElementById("nlEmail").value = ""; 
       
     } catch (error) {
@@ -4331,94 +4570,6 @@ if (nlForm) {
       }
     </script>
 
-    <!-- Event Modal Functionality -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const eventModal = document.getElementById('eventModal');
-        const eventModalClose = document.getElementById('eventModalClose');
-        const eventViewBtns = document.querySelectorAll('.event-view-btn');
-
-        // Event data
-        const eventData = {
-          'programming-contest': {
-            title: 'Programming Contest Participation',
-            description: 'Active participation in various programming contests and hackathons. These events have helped me sharpen my problem-solving skills and stay current with algorithmic thinking.',
-            date: 'Various dates',
-            category: 'Technical',
-            image: null
-          },
-          'certificate-ceremony': {
-            title: 'Achievement Ceremonies',
-            description: 'Certificate ceremonies and recognition events for academic and professional achievements. These milestones represent important moments in my continuous learning journey.',
-            date: 'Ongoing',
-            category: 'Academic',
-            image: null
-          },
-          'professional-events': {
-            title: 'Professional Events & Conferences',
-            description: 'Active participation in professional conferences, workshops, and networking events. These opportunities help me stay connected with industry trends and expand my professional network.',
-            date: 'Various dates',
-            category: 'Professional',
-            image: null
-          }
-        };
-
-        // Open modal
-        eventViewBtns.forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const eventType = btn.getAttribute('data-event');
-            const data = eventData[eventType];
-
-            if (data) {
-              document.getElementById('eventModalTitle').textContent = data.title;
-              document.getElementById('eventModalDescription').textContent = data.description;
-              document.getElementById('eventModalDate').textContent = data.date;
-              document.getElementById('eventModalCategory').textContent = data.category;
-
-              // Handle image
-              const modalImage = document.getElementById('eventModalImage');
-              if (data.image) {
-                modalImage.innerHTML = `<img src="${data.image}" alt="${data.title}">`;
-              } else {
-                modalImage.innerHTML = '<i class="fas fa-certificate"></i><p style="margin-top: 12px; font-size: 12px; color: var(--text-faint);">Add certificate image to assets/events/</p>';
-              }
-
-              eventModal.classList.add('open');
-              document.body.style.overflow = 'hidden';
-            }
-          });
-        });
-
-        // Close modal
-        eventModalClose.addEventListener('click', () => {
-          eventModal.classList.remove('open');
-          document.body.style.overflow = '';
-        });
-
-        eventModal.addEventListener('click', (e) => {
-          if (e.target === eventModal) {
-            eventModal.classList.remove('open');
-            document.body.style.overflow = '';
-          }
-        });
-
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && eventModal.classList.contains('open')) {
-            eventModal.classList.remove('open');
-            document.body.style.overflow = '';
-          }
-        });
-      });
-    </script>
-
-<script
-type="text/javascript"
-src="https://assets.calendly.com/assets/external/widget.js"
-async
-></script>
-
 <!-- Giscus Comments - Only loads on GitHub Pages or proper domains -->
 <script>
   (function() {
@@ -4448,36 +4599,6 @@ async
     }
   })();
 </script>
-
-    <script src="https://pl30577664.effectivecpmnetwork.com/85/f6/9f/85f69f080aa245183c13e2904e865553.js"></script>
-
-    <!-- Event Modal -->
-    <div class="event-modal" id="eventModal">
-      <div class="event-modal-content">
-        <div class="event-modal-header">
-          <h3 id="eventModalTitle">Event Details</h3>
-          <button class="event-modal-close" id="eventModalClose">&times;</button>
-        </div>
-        <div class="event-modal-body">
-          <div class="event-modal-image" id="eventModalImage">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <div class="event-modal-description" id="eventModalDescription">
-            Event description and details will appear here.
-          </div>
-          <div class="event-modal-details" id="eventModalDetails">
-            <div class="event-detail-item">
-              <div class="event-detail-label">Date</div>
-              <div class="event-detail-value" id="eventModalDate">-</div>
-            </div>
-            <div class="event-detail-item">
-              <div class="event-detail-label">Category</div>
-              <div class="event-detail-value" id="eventModalCategory">-</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </body>
 </html>

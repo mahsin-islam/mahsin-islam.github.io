@@ -1,50 +1,54 @@
 [
   {
     "id": "event-01",
-    "date": "2024-06-15",
-    "title": "Programming Contest Winner",
-    "category": "Competition",
-    "description": "First place in inter-university programming competition. Participated as team lead and solved complex algorithmic challenges.",
-    "organization": "Dhaka University",
-    "location": "Dhaka, Bangladesh",
+    "date": "2025-12-01",
+    "title": "Peer-reviewed publication — SCIRP Journal of Quantum Information Science",
+    "category": "Publication",
+    "description": "Co-authored research paper: 'A Novel Hybrid Quantum Framework for Assessing Noise Effects on Performance of Shor's Algorithm' — JQIS Vol.15 No.4, December 2025.",
+    "organization": "SCIRP — JQIS",
+    "location": "Online",
     "type": "achievement",
     "image": null,
-    "certificate": null
+    "certificate": null,
+    "link": "https://doi.org/10.4236/jqis.2025.154009"
   },
   {
     "id": "event-02",
-    "date": "2024-03-20",
-    "title": "Research Paper Presentation",
-    "category": "Academic",
-    "description": "Presented published research on quantum computing at international conference. Received recognition for innovative approach.",
-    "organization": "IEEE Conference",
+    "date": "2025",
+    "title": "IEEE publication — Robust Ensemble Classification Model for Detection of Cervical Cancer",
+    "category": "Publication",
+    "description": "Co-authored machine-learning research published at IEEE IETCSE 2025 (DOI: 10.1109/icetcse67169).",
+    "organization": "IEEE — IETCSE 2025",
     "location": "Virtual",
     "type": "presentation",
     "image": null,
-    "certificate": null
+    "certificate": null,
+    "link": "https://ieeexplore.ieee.org/document/11367608"
   },
   {
     "id": "event-03",
-    "date": "2023-11-10",
-    "title": "Hackathon Mentor",
-    "category": "Community",
-    "description": "Served as technical mentor for 24-hour hackathon. Guided 5 student teams through product development and pitching.",
-    "organization": "Tech Community BD",
-    "location": "Dhaka, Bangladesh",
+    "date": "2026-01-15",
+    "title": "Client build shipped — AI lead-management pipeline for a Canadian immigration law firm",
+    "category": "Milestone",
+    "description": "WhatsApp Business API + Respond.io + HubSpot + Calendly + Zapier, syncing case status with CaseEasy.ca — a fully automated intake pipeline.",
+    "organization": "Client engagement",
+    "location": "Remote",
     "type": "service",
     "image": null,
-    "certificate": null
+    "certificate": null,
+    "link": "#work"
   },
   {
     "id": "event-04",
-    "date": "2023-08-25",
-    "title": "Workshop Instructor",
-    "category": "Teaching",
-    "description": "Conducted full-day workshop on Flutter mobile development for 50+ participants. Covered from basics to advanced state management.",
-    "organization": "BD Tech Institute",
+    "date": "2026-06-01",
+    "title": "Japanese-learning platform — full-stack product in development",
+    "category": "Milestone",
+    "description": "Flutter app on a FastAPI + PostgreSQL + Redis + Celery backend, with guest-to-registered progress merge and an XP ledger.",
+    "organization": "Product build",
     "location": "Dhaka, Bangladesh",
-    "type": "teaching",
+    "type": "achievement",
     "image": null,
-    "certificate": null
+    "certificate": null,
+    "link": "#work"
   }
 ]

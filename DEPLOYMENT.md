@@ -42,7 +42,8 @@ Site rebuilds automatically in ~2 minutes. No other deploy step.
 ```
 [ ] All nav links tested locally (python -m http.server 8000)
 [ ] Contact form ID confirmed (Formspree)
-[ ] profile.jpg exists in assets/
+[ ] assets/profile.jpg + assets/icon-512.png present (PWA + hero)
+[ ] Featured video ID set in data/site-config.json (or fallback card shows)
 [ ] Account IDs updated (see ACCOUNTS.md for full list)
 [ ] Canary URL contains your correct GitHub username
 [ ] sitemap.xml URLs use your actual domain
@@ -252,33 +253,46 @@ The port must be 8000. Opening via `file://` won't work because the browser bloc
 ```
 portfolio-v4/
 ├── index.html                    ← main portfolio page (edit rarely)
-├── blog.html                     ← blog listing (hash-based routing)
+├── work.html                     ← case studies & R&D page
+├── blog.html                     ← blog listing + Medium feed (paginated)
 ├── services.html                 ← payments & consulting page
-├── site.webmanifest              ← PWA manifest
-├── service-worker.js             ← offline cache
+├── products.html                 ← digital products catalog + demo pages
+├── 404.html                      ← themed not-found page
+├── site.webmanifest              ← PWA manifest (icon: assets/icon-512.png)
+├── service-worker.js             ← offline cache (v4, network-first for /data/)
 ├── sitemap.xml                   ← Google indexing
 ├── robots.txt                    ← crawler rules
 ├── rss.xml                       ← blog RSS feed
-├── AGENTS.md                     ← AI agent instructions
+├── AGENTS.md / CLAUDE.md         ← AI agent instructions
+├── AI_PROJECT_MEMORY.md          ← architecture memory + roadmap + changelog
 ├── HOW_TO_ADD_CASE_STUDIES.md    ← case study field reference
+├── js/
+│   ├── common.js                 ← year / theme / mobile nav / modal focus (all pages)
+│   ├── render-case-studies.js    ← case study renderer (edit rarely)
+│   ├── render-events.js          ← events/certificates renderer
+│   └── render-site-config.js     ← notice bar, featured video, lifestyle
 ├── data/
 │   ├── case-studies.json         ← ★ edit to add/change case studies
-│   └── blogs.json                ← ★ edit to add blog posts
-├── js/
-│   └── render-case-studies.js    ← case study renderer (edit rarely)
+│   ├── blogs.json                ← ★ edit to add blog posts
+│   ├── events.json               ← ★ edit milestones/certificates
+│   ├── products.json             ← ★ edit digital products
+│   └── site-config.json          ← ★ notice, featured video, social links, lifestyle
 ├── blog/
 │   ├── flutter-performance-optimization.html
 │   ├── fastapi-backend-lessons.html
 │   └── bangladesh-fintech-landscape-2026.html
-└── assets/
-    ├── profile.jpg               ← your photo
-    ├── case-studies/             ← ★ save screenshots here
-    │   └── entry-02-diagram.png  ← architecture diagram
-    └── payments/                 ← ★ save QR codes here
-        ├── bkash-qr.png
-        ├── nagad-qr.png
-        └── rocket-qr.png
+├── assets/
+│   ├── profile.jpg               ← optimized portrait
+│   ├── icon-512.png              ← PWA icon
+│   ├── og-image.jpg              ← social share card (1200×630)
+│   ├── case-studies/             ← ★ save screenshots here
+│   │   └── entry-02-diagram.png  ← architecture diagram (add before deploy)
+│   └── payments/                 ← ★ save QR codes here
+│       ├── bkash-qr.png
+│       ├── nagad-qr.png
+│       └── rocket-qr.png
+└── _archive/                     ← git-ignored legacy files — never deploy
 ```
 
 **Files you edit regularly:** `data/*.json` (content), `assets/` (images)  
-**Files you edit rarely:** `index.html`, `blog.html`, `services.html`
+**Files you edit rarely:** `index.html`, `blog.html`, `services.html`, `work.html`, `products.html`

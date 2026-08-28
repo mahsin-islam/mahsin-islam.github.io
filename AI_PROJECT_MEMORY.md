@@ -520,3 +520,56 @@ git add . && git commit -m "content: new case study X" && git push origin main
 ---
 
 *Memory source: complete file-by-file audit of portfolio-v4 (all HTML, JS, JSON, SW, SEO files, and 13 docs). Line numbers refer to the audited snapshot.*
+
+---
+
+## 20. Change Log
+
+### Phase A — Critical fixes & trust (EXECUTED)
+
+| # | Fix | Files |
+|---|---|---|
+| 1 | Rickroll removed → settings-driven **featured-video facade** (`site-config.json` → `featuredVideo.id`), click-to-play with real thumbnail, `youtube-nocookie` embed, channel-link fallback card | `index.html`, `js/render-site-config.js` |
+| 2 | Metric count-up no longer clobbers non-numeric values ("Automated"→"0" bug) — count-up only for numeric values + `Number.isFinite` guard | `js/render-case-studies.js` |
+| 3 | PWA icon 404 fixed: generated `assets/icon-512.png`, optimized `assets/profile.jpg` (90 KB ← 1.23 MB PNG), `assets/og-image.jpg` 1200×630; manifest + OG/Twitter/JSON-LD images updated | `site.webmanifest`, `index.html` |
+| 4 | GSAP-CDN failure fallback: `html.no-gsap` force-shows all `.reveal` content | `index.html` |
+| 5 | Adsterra/eCPM tag removed from all pages (re-add deliberately, blog-only, per ACCOUNTS.md) | `index.html`, `blog.html`, `work.html`, `services.html` |
+| 6 | Theme FOUC fixed: pre-paint head script on all 7 HTML pages; toggle targets `<html>`; localStorage guarded | all HTML files |
+| 7 | Blog pagination no longer duplicates rows | `blog.html` |
+| 8 | Stray duplicate `</ul>` in nav removed | `blog.html`, `work.html`, `services.html` |
+| 9 | New `404.html`; `rss.xml` links fixed to real post URLs | new file, `rss.xml` |
+| 10 | Service worker rewritten: cache `portfolio-v4`, network-first for `/data/*`, never caches POST/cross-origin, cleanup on activate | `service-worker.js` |
+| 11 | Newsletter success message made honest ("Almost done — check your inbox") | `index.html` |
+| 12 | Visitor counter localStorage guarded | `index.html` |
+| 13 | Duplicate Calendly script removed from index | `index.html` |
+| 14 | JSON-LD `sameAs` now includes FB profile, FB page, DazzleoIT, Google Scholar, Play Store | `index.html` |
+| 15 | Docs: slop files moved to `_archive/` (git-ignored); `AGENTS.md` rewritten for current architecture; HOW_TO_ADD_CASE_STUDIES examples de-Rickrolled; `.gitignore` tidied | docs |
+| 16 | **New settings system**: `data/site-config.json` + `js/render-site-config.js` — dismissible, date-windowed notice bar + featured video + brand URLs. "Notice/notification from settings" requirement satisfied | new files |
+
+### Still awaiting owner data (Phase B inputs)
+
+`featuredVideo.id`, real case-study screenshots + measured metrics, `entry-02` architecture diagram file, real events/certificates (current `data/events.json` looks like filler), Play Store app names, course video list, and a final profile photo if he wants a different one.
+
+### Phase B (in progress) — executed so far
+
+| # | Change | Files |
+|---|---|---|
+| 17 | **Events system wired data-driven**: `js/render-events.js` now actually loaded on index; hardcoded cards + hardcoded modal + its script removed; new CSS for the renderer's card/popup markup; `events:rendered` listener re-batches scroll reveals | `index.html`, `js/render-events.js` |
+| 18 | **Honest events data**: `data/events.json` rewritten with only verifiable items (SCIRP paper, IEEE paper, immigration-pipeline ship, Japanese-learning platform) — fabricated "Dhaka University contest winner" claims removed; renderer gains year-only date support + external/anchor `link` button | `data/events.json`, `js/render-events.js` |
+| 19 | **AI · ML · Applied Research section** (`#ai-lab`): research (quantum + medical ML), AI client automation case study, Scholar profile — no fabricated claims | `index.html` |
+| 20 | **Apps on Google Play section** (`#apps`): DazzLeoIT Play badge + Facebook page button | `index.html` |
+| 21 | **Research section**: Google Scholar profile link under publications | `index.html` |
+| 22 | **Social proof grid rebuilt**: 6 real cards (YouTube, LinkedIn, GitHub, FB page, Scholar, DazzLeoIT/Play); dead "Google reviews" placeholder removed; honest lede | `index.html` |
+| 23 | **Footers**: Scholar + Play Store icons added on index/blog/work/services | 4 HTML files |
+| 24 | **Lifestyle section (settings-driven)**: hidden until `lifestyle` array in `data/site-config.json` is filled; renders icon+title+detail+tags cells; zero fabricated content | `index.html`, `js/render-site-config.js`, `data/site-config.json` |
+| 25 | **Services**: Digital-products lede now brands DazzleoIT + links Google Play | `services.html` |
+| 26 | Service worker precaches `render-events.js` + `404.html` | `service-worker.js` |
+| 27 | **Digital products system**: new `data/products.json` (6 real products) + `products.html` catalog/demo pages (`?slug=`) with feature lists, demo-slot, buy CTA; services page product cards now link to demo pages ("View demo & buy"); Products added to nav on all 4 main pages; sitemap + SW updated | `data/products.json` (new), `products.html` (new), `services.html`, 4 navs, `sitemap.xml`, `service-worker.js` |
+
+### Phase B remaining (blocked on owner data)
+
+Course-thumbs feed (needs YouTube **channel ID**), product demo pages + real product list, lifestyle facts, certificate/event images, case-study screenshots & metrics, Play Store app names for cards.
+
+### Phase C remaining
+
+Shared-JS consolidation (kill duplicated search/theme/renderer across pages), modal focus traps + aria-live polish, dead-CSS cleanup (`.event-modal*`, `.event-view-btn`, `.event-image`), optional GitHub Action prebuild for YouTube/Medium feeds (requires channel ID + repo push), AdSense privacy page when monetizing.

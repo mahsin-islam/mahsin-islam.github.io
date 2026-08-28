@@ -1,0 +1,113 @@
+[
+  {
+    "id": "entry-01",
+    "number": "01",
+    "category": "Client Engagement",
+    "categoryIcon": "fa-briefcase",
+    "status": "Shipped",
+    "title": "AI lead management system for a Canadian immigration law firm",
+    "role": "Solo build · Integration architecture & automation",
+    "problem": "Leads came in across WhatsApp, web forms, and calls, tracked by hand. Follow-ups slipped, with no single record of where a prospective client stood in intake.",
+    "approach": "Connected WhatsApp Business API and Respond.io as the conversational front door, routed qualified leads into HubSpot, wired Calendly for self-service booking, and used Zapier to sync case status with CaseEasy.ca.",
+    "impact": {
+      "before": "Manual tracking across 3 channels",
+      "after": "Single automated pipeline",
+      "improvement": "Fully automated"
+    },
+    "metrics": [
+      { "label": "Systems connected", "value": "5", "placeholder": false },
+      { "label": "Lead-to-CRM path", "value": "Automated", "placeholder": false },
+      { "label": "Measured outcome", "value": "add your result here", "placeholder": true }
+    ],
+    "tech": ["Respond.io", "HubSpot", "WhatsApp Business API", "Calendly", "Zapier", "CaseEasy.ca"],
+    "links": [
+      { "label": "Ask about this build", "href": "#contact", "icon": "fa-arrow-right" }
+    ],
+    "image": null,
+    "gallery": null,
+    "video": null,
+    "diagram": null
+  },
+  {
+    "id": "entry-02",
+    "number": "02",
+    "category": "Product Build",
+    "categoryIcon": "fa-mobile-screen",
+    "status": "In development",
+    "title": "Japanese-language learning platform for Bangla & English speakers",
+    "role": "Solo build · Mobile, backend, and admin panel",
+    "problem": "Existing Japanese-learning apps aren't built for Bangla or English speakers, and most lose a learner's progress the moment they're not signed in.",
+    "approach": "Flutter app on a FastAPI backend with PostgreSQL, Redis and Celery for background jobs. Built a guest-to-registered progress merge, an XP ledger for progression, and a deduplication pipeline for scraped vocabulary content.",
+    "impact": {
+      "before": "No Japanese app for Bangla speakers",
+      "after": "Full-stack platform built from zero",
+      "improvement": "First of its kind"
+    },
+    "metrics": [
+      { "label": "Stack layers", "value": "5", "placeholder": false },
+      { "label": "Core system", "value": "XP ledger", "placeholder": false },
+      { "label": "Status", "value": "add launch date", "placeholder": true }
+    ],
+    "tech": ["Flutter", "FastAPI", "PostgreSQL", "Redis", "Celery", "React"],
+    "links": [
+      { "label": "View repository", "href": "https://github.com/mahsin-islam", "icon": "fab fa-github" }
+    ],
+    "image": null,
+    "gallery": null,
+    "video": null,
+    "diagram": "assets/case-studies/entry-02-diagram.png"
+  },
+  {
+    "id": "entry-03",
+    "number": "03",
+    "category": "Platform & Content",
+    "categoryIcon": "fa-globe",
+    "status": "Live",
+    "title": "BDNextStep.com — education & career portal for Bangladesh",
+    "role": "Solo build · Platform, SEO, monetization strategy",
+    "problem": "Bangladeshi students and early-career professionals don't have one dependable place for education and career guidance.",
+    "approach": "Built on a custom domain with SEO-first content structure and a diversified monetization stack — AdSense, Ezoic, Adsterra, PropellerAds, and Monetag — so revenue isn't dependent on one network.",
+    "impact": {
+      "before": "No centralized education portal for BD",
+      "after": "5 ad networks, growing traffic",
+      "improvement": "Monetized + scaling"
+    },
+    "metrics": [
+      { "label": "Ad networks", "value": "5", "placeholder": false },
+      { "label": "Monthly visitors", "value": "add real number", "placeholder": true },
+      { "label": "Monthly revenue", "value": "add real number", "placeholder": true }
+    ],
+    "tech": ["Blogger", "Custom domain", "SEO", "AdSense", "Ezoic"],
+    "links": [
+      { "label": "Visit site", "href": "https://bdnextstep.com", "icon": "fa-arrow-up-right-from-square" }
+    ],
+    "image": null,
+    "gallery": null,
+    "video": null,
+    "diagram": null
+  },
+  {
+    "id": "entry-04",
+    "number": "04",
+    "category": "R&D — Ongoing",
+    "categoryIcon": "fa-flask",
+    "status": "Continuous",
+    "title": "R&D bench — UI/UX redesigns, offline-first architecture, and applied AI experiments",
+    "role": "Ongoing · Personal research & development track",
+    "problem": "Most of what eventually ships starts as an open question — a redesign hypothesis, an offline-sync architecture, an AI integration nobody has tried in this exact combination yet.",
+    "approach": "Current bench work includes a full UI/UX redesign strategy for an exam-prep platform (search-first navigation, Bangla typography, seasonal content strategy), and an offline-first personal finance app with Islamic finance tracking (Zakat/Sadaqah). Each starts as a working prototype before any line is called a 'feature.'",
+    "metrics": [
+      { "label": "Active tracks", "value": "2+", "placeholder": false },
+      { "label": "Mode", "value": "Prototype-first", "placeholder": false },
+      { "label": "Next milestone", "value": "add current focus", "placeholder": true }
+    ],
+    "tech": ["UI/UX Research", "Offline-first design", "Flutter", "Applied AI/ML"],
+    "links": [
+      { "label": "Ask what's on the bench right now", "href": "#contact", "icon": "fa-arrow-right" }
+    ],
+    "image": null,
+    "gallery": null,
+    "video": null,
+    "diagram": null
+  }
+]

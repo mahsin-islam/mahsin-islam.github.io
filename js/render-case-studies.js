@@ -65,7 +65,11 @@ async function renderCaseStudies() {
       entries.forEach(e => {
         if (!e.isIntersecting) return;
         const el = e.target;
-        const target = parseInt(el.getAttribute('data-count-to'), 10);
+        const target = parseFloat(el.getAttribute('data-count-to'));
+        if (!Number.isFinite(target)) {
+          countObserver.unobserve(el);
+          return;
+        }
         const duration = 1400;
         const start = performance.now();
         function tick(now) {
@@ -108,15 +112,20 @@ function renderEntry(entry, idx) {
     </div>`;
   }
 
-  // --- metrics with optional count-up
+  // --- metrics with optional count-up (numeric values only — never clobber text)
   const metricsHtml = entry.metrics.map(m => {
     const isPlaceholder = m.placeholder;
     const prefix = m.prefix || '';
     const suffix = m.suffix || '';
-    const display = isPlaceholder
-      ? `<span class="m-value placeholder-note">— ${escapeHtml(m.value)} —</span>`
-      : `<span class="m-value" data-count-to="${parseInt(m.value) || 0}" data-prefix="${escapeHtml(prefix)}" data-suffix="${escapeHtml(suffix)}">${escapeHtml(prefix)}${escapeHtml(m.value)}${escapeHtml(suffix)}</span>`;
-    return `<div class="metric"><div class="m-label">${escapeHtml(m.label)}</div>${display}</div>`;
+    const raw = String(m.value == null ? '' : m.value).replace(/,/g, '');
+    const isNumeric = /^-?\d+(\.\d+)?$/.test(raw.trim());
+    if (isPlaceholder || !isNumeric) {
+      const display = isPlaceholder
+        ? `— ${escapeHtml(m.value)} —`
+        : `${escapeHtml(prefix)}${escapeHtml(m.value)}${escapeHtml(suffix)}`;
+      return `<div class="metric"><div class="m-label">${escapeHtml(m.label)}</div><span class="m-value${isPlaceholder ? ' placeholder-note' : ''}">${display}</span></div>`;
+    }
+    return `<div class="metric"><div class="m-label">${escapeHtml(m.label)}</div><span class="m-value" data-count-to="${parseFloat(raw)}" data-prefix="${escapeHtml(prefix)}" data-suffix="${escapeHtml(suffix)}">${escapeHtml(prefix)}${escapeHtml(m.value)}${escapeHtml(suffix)}</span></div>`;
   }).join('');
 
   // --- before/after impact bar
@@ -229,6 +238,10 @@ function openVideoLightbox(videoId) {
   modal.querySelector('.lightbox-frame').innerHTML =
     `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${videoId}?autoplay=1" title="Video" frameborder="0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
   modal.classList.add('open');
+  if (window.__a11y) {
+    window.__a11y.saveFocus();
+    window.__a11y.focusFirst(modal.querySelector('.lightbox-panel'));
+  }
 }
 
 function closeVideoLightbox() {
@@ -236,6 +249,7 @@ function closeVideoLightbox() {
   if (!modal) return;
   modal.classList.remove('open');
   modal.querySelector('.lightbox-frame').innerHTML = '';
+  if (window.__a11y) window.__a11y.restoreFocus();
 }
 
 document.addEventListener('DOMContentLoaded', renderCaseStudies);

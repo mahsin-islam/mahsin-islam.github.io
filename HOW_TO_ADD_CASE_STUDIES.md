@@ -37,7 +37,7 @@ put your newest or most important work first.
 | `tech` | yes | Array of strings, shown as tags |
 | `links` | yes | Array of `{label, href, icon}`. Internal links (like `#contact`) render without `target="_blank"`; external links (`http...`) open in a new tab automatically. |
 | `image` | no | Path to a screenshot, e.g. `"assets/case-studies/entry-05.jpg"`. Leave `null` for a clean placeholder tile instead. |
-| `video` | no | Just the YouTube video ID (the part after `v=` in a YouTube URL), e.g. `"dQw4w9WgXcQ"`. Leave `null` to hide the video button. |
+| `video` | no | Just the YouTube video ID (the part after `v=` in a YouTube URL), e.g. `"AbC123xYz"`. Leave `null` to hide the video button. |
 
 ---
 
@@ -77,8 +77,8 @@ put your newest or most important work first.
 
 ## Adding a project video
 
-1. Find your YouTube video's ID — in `https://youtube.com/watch?v=dQw4w9WgXcQ`, the ID is `dQw4w9WgXcQ`
-2. Set `"video": "dQw4w9WgXcQ"` in that entry
+1. Find your YouTube video's ID — in `https://youtube.com/watch?v=AbC123xYz`, the ID is `AbC123xYz`
+2. Set `"video": "AbC123xYz"` in that entry
 3. A "Watch the walkthrough" link appears automatically and opens the video in an in-page lightbox
 
 ---

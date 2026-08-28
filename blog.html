@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      /* Pre-paint theme: prevents dark flash for light-mode users */
+      (function () {
+        try {
+          var t = localStorage.getItem("theme");
+          if (t === "light" || t === "dark") {
+            document.documentElement.setAttribute("data-theme", t);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <title>
       Blog — Md. Mahsin-Ul-Islam | Software Engineer &amp; Researcher
     </title>
@@ -670,7 +681,7 @@
       })(window, document, "clarity", "script", "xtj7i8cyjj");
     </script>
   </head>
-  <body data-theme="dark">
+  <body>
     <a href="#main" class="skip-link">Skip to content</a>
     <header>
       <nav aria-label="Primary">
@@ -682,8 +693,8 @@
           <li><a href="work.html">Work &amp; R&amp;D</a></li>
           <li><a href="blog.html" class="active">Blog</a></li>
           <li><a href="services.html">Services</a></li>
+          <li><a href="products.html">Products</a></li>
           <li><a href="index.html#contact">Contact</a></li>
-        </ul>
         </ul>
         <div class="nav-right">
           <div class="search-wrap">
@@ -694,7 +705,7 @@
               <input type="text" id="searchInput" placeholder="Search..." />
               <button class="search-close" id="searchClose">&times;</button>
             </div>
-            <div class="search-results" id="searchResults"></div>
+            <div class="search-results" id="searchResults" aria-live="polite"></div>
           </div>
           <a href="services.html#book" class="nav-cta">Book a call</a>
           <button
@@ -829,36 +840,27 @@
             aria-label="Facebook"
             ><i class="fab fa-facebook"></i
           ></a>
+          <a
+            href="https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4"
+            target="_blank"
+            rel="noopener"
+            aria-label="Google Scholar"
+            ><i class="fas fa-graduation-cap"></i
+          ></a>
+          <a
+            href="https://play.google.com/store/apps/developer?id=DazzLeoIT"
+            target="_blank"
+            rel="noopener"
+            aria-label="Google Play"
+            ><i class="fab fa-google-play"></i
+          ></a>
         </div>
       </div>
     </footer>
 
+    <script src="js/common.js"></script>
     <script>
-      document.getElementById("year").textContent = new Date().getFullYear();
-      const body = document.body;
-
-      /* mobile nav */
-      const mtoggle = document.getElementById("mobileToggle");
-      const links = document.getElementById("navLinks");
-      mtoggle.addEventListener("click", () => {
-        const open = links.classList.toggle("open");
-        mtoggle.setAttribute("aria-expanded", open);
-      });
-      links.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          links.classList.remove("open");
-          mtoggle.setAttribute("aria-expanded", "false");
-        }),
-      );
-
-      /* theme toggle */
-      document.getElementById("themeToggle").addEventListener("click", () => {
-        const t = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        body.setAttribute("data-theme", t);
-        localStorage.setItem("theme", t);
-      });
-      const saved = localStorage.getItem("theme");
-      if (saved) body.setAttribute("data-theme", saved);
+      /* year / theme / mobile nav are handled by js/common.js */
 
       /* ---- SEARCH ---- */
       let sIdx = [];
@@ -1083,6 +1085,8 @@
         }
 
         function renderPagination() {
+          const existing = container.parentNode.querySelector(".pagination");
+          if (existing) existing.remove();
           const totalPages = Math.ceil(displayedPosts.length / POSTS_PER_PAGE);
           if (totalPages <= 1) return;
 
@@ -1190,6 +1194,5 @@
   })();
 </script>
 
-    <script src="https://pl30577664.effectivecpmnetwork.com/85/f6/9f/85f69f080aa245183c13e2904e865553.js"></script>
   </body>
 </html>

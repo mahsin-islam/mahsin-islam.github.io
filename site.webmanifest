@@ -8,8 +8,14 @@
   "description": "Software Engineer, Researcher & Educator — FinTech, EdTech, AI/ML",
   "icons": [
     {
-      "src": "assets/profile.jpg",
+      "src": "assets/icon-512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/profile.jpg",
+      "sizes": "any",
       "type": "image/jpeg"
     }
   ]

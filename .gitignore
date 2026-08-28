@@ -1,7 +1,5 @@
-_deepseek.md
-DELIVERY_SUMMARY.txt
-IMPLEMENTATION_GUIDE.md
-mahsin_portfolio_redesign_strategy.md
-README_COMPLETE_DELIVERY.txt
-portfolio-v4.zip
-case-studies.json
+# Local archive of legacy / AI-slop files — never deployed
+_archive/
+.DS_Store
+Thumbs.db
+*.zip

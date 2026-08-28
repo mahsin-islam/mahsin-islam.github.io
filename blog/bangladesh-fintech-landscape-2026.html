@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>/* Pre-paint theme: prevents dark flash for light-mode users */
+(function(){try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark"){document.documentElement.setAttribute("data-theme",t)}}catch(e){}})();
+</script>
 <title>Bangladesh FinTech 2026: What's Actually Shipping — Mahsin-Ul-Islam</title>
 <meta name="description" content="Working inside a bank's ICT division gives a different perspective on FinTech than reading TechCrunch. Here's what's real, what's hype, and where the opportunities are.">
 <meta name="robots" content="index, follow">
@@ -44,6 +47,7 @@ nav{display:flex;align-items:center;justify-content:space-between;height:64px;ma
 .icon-sun{color:var(--brass);position:absolute;opacity:0;transform:rotate(-90deg) scale(.5);transition:opacity .35s ease,transform .5s ease}
 [data-theme="light"] .icon-moon{opacity:0;transform:rotate(90deg) scale(.5)}
 [data-theme="light"] .icon-sun{opacity:1;transform:rotate(0) scale(1)}
+.mobile-toggle{display:none;background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;margin-left:12px}@media(max-width:800px){.nav-links{display:none}.mobile-toggle{display:block}.nav-links.open{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:var(--ink-2);padding:20px 28px;gap:16px;border-bottom:1px solid var(--hairline-soft)}}
 main{max-width:800px;margin:0 auto;padding:60px 28px 40px}
 .post-thumb{border:1px solid var(--hairline);border-radius:12px;overflow:hidden;margin-bottom:32px;max-height:360px;background:var(--ink-3)}
 .post-thumb img{width:100%;height:100%;object-fit:cover;display:block}
@@ -75,7 +79,7 @@ footer{border-top:1px solid var(--hairline-soft);padding:36px 0;margin-top:40px}
 .cta-btn-o{border:1px solid var(--brass-soft); color:var(--brass)}.cta-btn-o:hover{border-color:var(--brass); background:color-mix(in srgb,var(--brass)8%,transparent)}
 </style>
 </head>
-<body data-theme="dark">
+<body>
 <header>
   <nav>
     <a href="../index.html" class="brand"><span class="mark">M</span> Mahsin-Ul-Islam</a>
@@ -91,6 +95,7 @@ footer{border-top:1px solid var(--hairline-soft);padding:36px 0;margin-top:40px}
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
     </button>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false"><i class="fas fa-bars"></i></button>
   </nav>
 </header>
 <main>
@@ -120,10 +125,8 @@ footer{border-top:1px solid var(--hairline-soft);padding:36px 0;margin-top:40px}
     </div>
   </div>
 </footer>
+<script src="../js/common.js"></script>
 <script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const b=document.body;document.getElementById('themeToggle').addEventListener('click',()=>{const t=b.getAttribute('data-theme')==='dark'?'light':'dark';b.setAttribute('data-theme',t);localStorage.setItem('theme',t)});
-const saved=localStorage.getItem('theme');if(saved)b.setAttribute('data-theme',saved);
 
 const slug='bangladesh-fintech-landscape-2026';
 fetch('../data/blogs.json').then(r=>r.json()).then(posts=>{

@@ -1,0 +1,123 @@
+[
+  {
+    "id": "flutter-starter-kit",
+    "name": "Flutter Starter Kit",
+    "price": "$19",
+    "icon": "fa-mobile-alt",
+    "category": "Mobile boilerplate",
+    "tagline": "Login, signup, onboarding, Firebase setup — production-ready boilerplate.",
+    "description": "A clean, architecture-first Flutter starter with auth flow, theming, state management and Firebase wiring — skip the first 40 hours of every app build.",
+    "features": [
+      "Email/password + social auth scaffold",
+      "Onboarding flow with local persistence",
+      "Light/dark theme system built in",
+      "Firebase (Auth, Firestore, Analytics) wired",
+      "Routing with navigation guards",
+      "CI-ready folder structure"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  },
+  {
+    "id": "fastapi-boilerplate",
+    "name": "FastAPI Boilerplate",
+    "price": "$29",
+    "icon": "fa-server",
+    "category": "Backend boilerplate",
+    "tagline": "Auth, DB sessions, Celery, Docker — everything wired up.",
+    "description": "The production FastAPI skeleton I use for client builds: async SQLAlchemy sessions, JWT auth, Celery + Redis jobs, Docker Compose, and pytest setup with a real test database.",
+    "features": [
+      "Async SQLAlchemy + PostgreSQL/MySQL",
+      "JWT auth with refresh tokens",
+      "Celery + Redis background jobs",
+      "Alembic migrations",
+      "Docker + docker-compose",
+      "pytest with dependency overrides"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  },
+  {
+    "id": "wordpress-theme",
+    "name": "WordPress Theme",
+    "price": "$15",
+    "icon": "fa-wordpress",
+    "category": "Web template",
+    "tagline": "Customizable blog theme — SEO, responsive, fast.",
+    "description": "A lightweight, SEO-first WordPress theme for blogs and portfolios: schema markup, lazy images, and no bloated page builders.",
+    "features": [
+      "SEO meta + schema.org markup",
+      "Mobile-first responsive layout",
+      "Lazy-loaded images & WebP support",
+      "Dark/light mode toggle",
+      "Customizer settings panel"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  },
+  {
+    "id": "rest-api-template",
+    "name": "REST API Template",
+    "price": "$12",
+    "icon": "fa-project-diagram",
+    "category": "Backend template",
+    "tagline": "Node.js / Express — JWT auth, CRUD, validation, tests.",
+    "description": "A complete Node.js/Express REST API template with layered architecture, JWT auth, request validation, error middleware, and integration tests.",
+    "features": [
+      "Express with layered architecture",
+      "JWT auth + role middleware",
+      "Zod/Joi request validation",
+      "Central error handling",
+      "Integration tests included"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  },
+  {
+    "id": "sql-cheat-sheets",
+    "name": "SQL Cheat Sheets",
+    "price": "$5",
+    "icon": "fa-database",
+    "category": "Reference pack",
+    "tagline": "PostgreSQL + MySQL reference — queries, joins, indexes.",
+    "description": "A printable, interview-ready reference pack covering PostgreSQL and MySQL: joins, window functions, indexing, transactions, and the 40 queries I actually use in production.",
+    "features": [
+      "PostgreSQL + MySQL side by side",
+      "Joins, window functions, CTEs",
+      "Indexing & query-plan basics",
+      "Transactions & isolation levels",
+      "Printable A4/PDF layout"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  },
+  {
+    "id": "resume-templates",
+    "name": "Resume Templates",
+    "price": "$3",
+    "icon": "fa-file-pdf",
+    "category": "Career pack",
+    "tagline": "ATS-friendly CV templates — tech & finance focused.",
+    "description": "Three ATS-friendly resume/CV templates tuned for software engineering and finance roles — clean typography, keyword-friendly structure, and matching cover-letter layouts.",
+    "features": [
+      "3 tech + finance layouts",
+      "ATS keyword-friendly structure",
+      "Matching cover letters",
+      "Editable (Word + PDF)"
+    ],
+    "demo": null,
+    "video": null,
+    "buyUrl": "index.html#contact",
+    "status": "available"
+  }
+]

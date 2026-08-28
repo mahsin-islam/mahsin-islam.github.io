@@ -8,7 +8,7 @@
     <atom:link href="https://mahsin-islam.github.io/rss.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>10 Flutter Performance Optimizations That Actually Matter</title>
-      <link>https://mahsin-islam.github.io/blog#flutter-performance-optimization</link>
+      <link>https://mahsin-islam.github.io/blog/flutter-performance-optimization</link>
       <guid>flutter-performance-optimization</guid>
       <pubDate>Mon, 15 Jun 2026 00:00:00 +0600</pubDate>
       <category>Flutter</category>
@@ -16,7 +16,7 @@
     </item>
     <item>
       <title>What I Learned Building a Production FastAPI Backend From Scratch</title>
-      <link>https://mahsin-islam.github.io/blog#fastapi-backend-lessons</link>
+      <link>https://mahsin-islam.github.io/blog/fastapi-backend-lessons</link>
       <guid>fastapi-backend-lessons</guid>
       <pubDate>Wed, 20 May 2026 00:00:00 +0600</pubDate>
       <category>Backend</category>
@@ -24,7 +24,7 @@
     </item>
     <item>
       <title>Bangladesh FinTech 2026: What's Actually Shipping</title>
-      <link>https://mahsin-islam.github.io/blog#bangladesh-fintech-landscape-2026</link>
+      <link>https://mahsin-islam.github.io/blog/bangladesh-fintech-landscape-2026</link>
       <guid>bangladesh-fintech-landscape-2026</guid>
       <pubDate>Fri, 10 Apr 2026 00:00:00 +0600</pubDate>
       <category>FinTech</category>
