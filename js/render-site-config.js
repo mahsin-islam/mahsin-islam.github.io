@@ -117,6 +117,81 @@
       .join('');
   }
 
+  /* ---- Courses / YouTube feed (settings-driven) ----
+     1. Prebuilt data/youtube.json (future GitHub Action) wins.
+     2. Else live channel RSS when youtube.channelId is set.
+     3. Else the static fallback card already in the HTML stays. */
+  const courseBox = document.querySelector('[data-config="courses"]');
+  if (courseBox) {
+    loadCourses(cfg && cfg.youtube);
+  }
+
+  async function loadCourses(yt) {
+    let videos = null;
+    try {
+      const r = await fetch('data/youtube.json');
+      if (r.ok) {
+        const d = await r.json();
+        if (Array.isArray(d.videos) && d.videos.length) videos = d.videos;
+      }
+    } catch (e) {}
+    if (!videos && yt && yt.channelId) {
+      try {
+        const res = await fetch(
+          'https://www.youtube.com/feeds/videos.xml?channel_id=' +
+            encodeURIComponent(yt.channelId)
+        );
+        if (res.ok) {
+          const xml = await res.text();
+          const doc = new DOMParser().parseFromString(xml, 'text/xml');
+          const entries = doc.querySelectorAll('entry');
+          videos = Array.from(entries)
+            .slice(0, 6)
+            .map(function (en) {
+              const idEl = en.querySelector('yt\\:videoId') || en.querySelector('videoId');
+              const vid = idEl ? (idEl.textContent || '').trim() : '';
+              const titleEl = en.querySelector('title');
+              const statEl = en.querySelector('media\\:statistics') || en.querySelector('statistics');
+              const pubEl = en.querySelector('published');
+              return {
+                id: vid,
+                title: titleEl ? titleEl.textContent : 'Untitled',
+                url: 'https://www.youtube.com/watch?v=' + vid,
+                thumbnail: vid ? 'https://i.ytimg.com/vi/' + vid + '/hqdefault.jpg' : '',
+                views: statEl ? parseInt(statEl.getAttribute('views'), 10) || 0 : 0,
+                published: pubEl ? pubEl.textContent : ''
+              };
+            })
+            .filter(function (v) {
+              return v.id;
+            });
+        }
+      } catch (e) {
+        console.warn('YouTube RSS fetch failed:', e);
+      }
+    }
+    if (videos && videos.length) {
+      courseBox.innerHTML = videos
+        .map(function (v) {
+          return (
+            '<a class="yt-card" href="' + escAttr(v.url) + '" target="_blank" rel="noopener">' +
+            '<div class="yt-thumb"><img src="' + escAttr(v.thumbnail) + '" alt="' + esc(v.title) + '" loading="lazy">' +
+            '<span class="yt-duration">▶</span></div>' +
+            '<div class="yt-body"><h4>' + esc(v.title) + '</h4>' +
+            '<div class="yt-meta"><span>' + (v.views ? formatViews(v.views) + ' views' : 'New') + '</span><span>Watch →</span></div>' +
+            '</div></a>'
+          );
+        })
+        .join('');
+    }
+  }
+
+  function formatViews(n) {
+    if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+    return String(n);
+  }
+
   function esc(s) {
     const d = document.createElement('div');
     d.textContent = s == null ? '' : String(s);

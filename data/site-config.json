@@ -31,5 +31,10 @@
     "scholar": "https://scholar.google.com/citations?user=stGuysUAAAAJ&hl=en&authuser=4",
     "playStore": "https://play.google.com/store/apps/developer?id=DazzLeoIT"
   },
+  "youtube": {
+    "channelId": "",
+    "channelName": "Mahsin The Educator",
+    "channelUrl": "https://www.youtube.com/@mahsintheeducator"
+  },
   "lifestyle": []
 }

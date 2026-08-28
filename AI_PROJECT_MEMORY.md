@@ -566,6 +566,23 @@ git add . && git commit -m "content: new case study X" && git push origin main
 | 26 | Service worker precaches `render-events.js` + `404.html` | `service-worker.js` |
 | 27 | **Digital products system**: new `data/products.json` (6 real products) + `products.html` catalog/demo pages (`?slug=`) with feature lists, demo-slot, buy CTA; services page product cards now link to demo pages ("View demo & buy"); Products added to nav on all 4 main pages; sitemap + SW updated | `data/products.json` (new), `products.html` (new), `services.html`, 4 navs, `sitemap.xml`, `service-worker.js` |
 
+### Phase C (in progress) — executed so far
+
+| # | Change | Files |
+|---|---|---|
+| 28 | **Fixed live bug**: index theme toggle referenced removed `body` variable (ReferenceError) — found during consolidation | `index.html` |
+| 29 | **Shared JS**: new `js/common.js` (year/theme/mobile-nav/`window.__a11y` focus helpers) adopted on all 9 HTML pages; duplicated inline theme/nav/year code deleted everywhere | `js/common.js` (new), all HTML pages |
+| 30 | **Mobile nav on blog posts**: post templates got the mobile-toggle button + CSS (was missing → nav unusable on phones) | 3 blog post files |
+| 31 | **A11y**: focus save/restore + initial focus for case-study modal, video lightbox, certificate popup; `role=dialog aria-modal` on case-study modal; `aria-live=polite` on all search results | `index.html`, `js/render-case-studies.js`, `js/render-events.js`, 3 pages |
+| 32 | **Dead CSS removed**: old hardcoded-events styles (`.event-modal*`, `.event-view-btn`, `.event-image`, `.event-content`, `.ve-info`) — ~120 lines | `index.html` |
+| 33 | Docs synced: `CLAUDE.md` rewritten, `DEPLOYMENT.md` tree + checklist updated, `AGENTS.md` updated with common.js rules | docs |
+| 34 | **Git initialized** locally with identity `mahsin.islam@gmail.com` + commits `v4 rebuild` and docs commit — deployment is now `git remote add + push` away | repo |
+| 35 | **Owner deliverables**: `README.md` (project overview + quick deploy) and `DATA_NEEDED.md` (prioritized content checklist) | new files |
+
+### Phase C remaining (deferred / owner-gated)
+
+Search consolidation + debounce (per-page search works fine today), work.html adoption of the shared case-study renderer (medium-risk refactor), GitHub Action prebuild for YouTube/Medium feeds (**needs YouTube channel ID + pushed repo**), SRI hashes for CDN scripts (verify after deploy), AdSense/privacy page only when monetizing.
+
 ### Phase B remaining (blocked on owner data)
 
 Course-thumbs feed (needs YouTube **channel ID**), product demo pages + real product list, lifestyle facts, certificate/event images, case-study screenshots & metrics, Play Store app names for cards.

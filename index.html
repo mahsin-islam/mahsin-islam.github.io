@@ -2631,6 +2631,102 @@
         background: color-mix(in srgb, var(--brass) 8%, transparent);
       }
 
+      /* ===== COURSES / YOUTUBE FEED (settings-driven) ===== */
+      .yt-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      @media (max-width: 860px) {
+        .yt-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 540px) {
+        .yt-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .yt-card {
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        background: var(--ink-2);
+        overflow: hidden;
+        text-decoration: none;
+        display: block;
+        transition: transform 0.25s ease, border-color 0.25s ease;
+      }
+      .yt-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--brass-soft);
+      }
+      .yt-thumb {
+        position: relative;
+        aspect-ratio: 16 / 9;
+        background: var(--ink-3);
+      }
+      .yt-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .yt-duration {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        background: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        font-size: 10.5px;
+        padding: 3px 8px;
+        border-radius: 4px;
+      }
+      .yt-body {
+        padding: 14px 16px 16px;
+      }
+      .yt-body h4 {
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text);
+        line-height: 1.4;
+        margin-bottom: 8px;
+        font-family: var(--sans);
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .yt-meta {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: var(--text-faint);
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .yt-fallback {
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        background: var(--ink-2);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        text-align: center;
+      }
+      .yt-fallback i {
+        font-size: 30px;
+        color: var(--brass);
+      }
+      .yt-fallback p {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-dim);
+        line-height: 1.6;
+      }
+
       /* ===== SETTINGS-DRIVEN NOTICE BAR (data/site-config.json) ===== */
       .site-notice {
         display: flex;
@@ -3335,6 +3431,42 @@
         </div>
       </section>
 
+      <!-- COURSES & TUTORIALS (settings-driven) -->
+      <section id="courses">
+        <div class="wrap">
+          <div class="eyebrow">Courses &amp; tutorials</div>
+          <h2 class="reveal">Learn from the channel</h2>
+          <p class="section-lede reveal">
+            Latest tutorials from Mahsin The Educator — C/C++, Java, Flutter,
+            and practical software engineering. Auto-pulled from YouTube once
+            <code style="font-family: var(--mono); color: var(--brass)"
+              >youtube.channelId</code
+            >
+            is set in
+            <code style="font-family: var(--mono); color: var(--brass)"
+              >data/site-config.json</code
+            >.
+          </p>
+          <div class="yt-grid reveal" data-config="courses">
+            <a
+              class="yt-fallback"
+              href="https://www.youtube.com/@mahsintheeducator"
+              target="_blank"
+              rel="noopener"
+            >
+              <i class="fab fa-youtube"></i>
+              <p>
+                Latest tutorials appear here automatically — meanwhile, browse
+                all videos at
+                <strong style="color: var(--brass)"
+                  >youtube.com/@mahsintheeducator</strong
+                >
+              </p>
+            </a>
+          </div>
+        </div>
+      </section>
+
       <!-- CAPABILITIES -->
       <section id="capabilities">
         <div class="wrap">
@@ -4001,6 +4133,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="js/common.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/render-case-studies.js"></script>
     <script src="js/render-site-config.js"></script>
     <script src="js/render-events.js"></script>
@@ -4276,110 +4409,55 @@
         window.__a11y.restoreFocus();
       }
 
-      /* ===== SEARCH ===== */
-      let searchIndex = [];
-      (function initSearch() {
-        const toggle = document.getElementById("searchToggle");
-        const box = document.getElementById("searchBox");
-        const input = document.getElementById("searchInput");
-        const close = document.getElementById("searchClose");
-        const results = document.getElementById("searchResults");
-
-        toggle.addEventListener("click", () => {
-          box.classList.add("open");
-          input.focus();
-        });
-        close.addEventListener("click", () => {
-          box.classList.remove("open");
-          results.classList.remove("show");
-          input.value = "";
-        });
-        input.addEventListener("input", () => {
-          const q = input.value.trim().toLowerCase();
-          if (q.length < 2) {
-            results.classList.remove("show");
-            return;
-          }
-          buildSearchIndex().then(() => {
-            const matches = searchIndex
-              .filter(
-                (item) =>
-                  (item.title || "").toLowerCase().includes(q) ||
-                  (item.detail || "").toLowerCase().includes(q) ||
-                  (item.tags || []).some((t) => t.toLowerCase().includes(q)),
-              )
-              .slice(0, 6);
-            if (matches.length) {
-              results.innerHTML = matches
-                .map(
-                  (m) =>
-                    `<a href="${m.url}" class="search-item">
-              <div class="sr-type">${escapeHtml2(m.type)}</div>
-              <div class="sr-title">${escapeHtml2(m.title)}</div>
-              ${m.detail ? `<div class="sr-detail">${escapeHtml2(m.detail)}</div>` : ""}
-            </a>`,
-                )
-                .join("");
-              results.classList.add("show");
-            } else {
-              results.innerHTML = '<div class="no-results">Nothing found</div>';
-              results.classList.add("show");
-            }
-          });
-        });
-        document.addEventListener("click", (e) => {
-          if (!e.target.closest(".search-wrap")) {
-            results.classList.remove("show");
-          }
-        });
-        async function buildSearchIndex() {
-          if (searchIndex.length) return;
-          searchIndex.push(
-            { type: "Section", title: "Work & Case Studies", url: "#work" },
-            { type: "Section", title: "Education", url: "#education" },
-            {
-              type: "Section",
-              title: "Research & Publications",
-              url: "#research",
-            },
-            { type: "Section", title: "Contact", url: "#contact" },
-            { type: "Section", title: "Skills & Capabilities", url: "#skills" },
-            { type: "Section", title: "GitHub Activity", url: "#github" },
-            {
-              type: "Page",
-              title: "Blog",
-              url: "blog",
-              detail: "Technical deep dives on Flutter, FastAPI, FinTech",
-            },
-          );
-          try {
-            const cs = await fetch("data/case-studies.json").then((r) =>
-              r.json(),
-            );
-            cs.forEach((e) =>
-              searchIndex.push({
-                type: "Case Study",
-                title: e.title,
-                detail: e.role,
-                url: "#work",
-                tags: e.tech || [],
-              }),
-            );
-          } catch {}
-          try {
-            const bl = await fetch("data/blogs.json").then((r) => r.json());
-            bl.forEach((b) =>
-              searchIndex.push({
-                type: "Blog Post",
-                title: b.title,
-                detail: b.excerpt,
-                url: "blog/" + b.slug,
-                tags: b.tags || [],
-              }),
-            );
-          } catch {}
-        }
-      })();
+      /* ===== SEARCH (shared engine: js/search.js) ===== */
+      initSiteSearch({
+        seeds: [
+          { type: "Section", title: "Work & Case Studies", url: "#work" },
+          { type: "Section", title: "AI · ML · Applied Research", url: "#ai-lab" },
+          { type: "Section", title: "Education", url: "#education" },
+          { type: "Section", title: "Courses & Tutorials", url: "#courses" },
+          { type: "Section", title: "Events & Milestones", url: "#events" },
+          { type: "Section", title: "Research & Publications", url: "#research" },
+          { type: "Section", title: "Skills & Capabilities", url: "#skills" },
+          { type: "Section", title: "Apps on Google Play", url: "#apps" },
+          { type: "Section", title: "GitHub Activity", url: "#github" },
+          { type: "Section", title: "Contact", url: "#contact" },
+          {
+            type: "Page",
+            title: "Blog",
+            url: "blog.html",
+            detail: "Technical deep dives on Flutter, FastAPI, FinTech",
+          },
+          {
+            type: "Page",
+            title: "Products",
+            url: "products.html",
+            detail: "Source code, templates & boilerplates",
+          },
+        ],
+        dataFiles: [
+          {
+            file: "data/case-studies.json",
+            map: (e) => ({
+              type: "Case Study",
+              title: e.title,
+              detail: e.role,
+              url: "#work",
+              tags: e.tech || [],
+            }),
+          },
+          {
+            file: "data/blogs.json",
+            map: (b) => ({
+              type: "Blog Post",
+              title: b.title,
+              detail: b.excerpt,
+              url: "blog/" + b.slug + ".html",
+              tags: b.tags || [],
+            }),
+          },
+        ],
+      });
       function escapeHtml2(s) {
         if (!s) return "";
         const d = document.createElement("div");

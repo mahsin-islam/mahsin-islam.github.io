@@ -859,95 +859,41 @@
     </footer>
 
     <script src="js/common.js"></script>
+    <script src="js/search.js"></script>
     <script>
       /* year / theme / mobile nav are handled by js/common.js */
 
-      /* ---- SEARCH ---- */
-      let sIdx = [];
-      (function () {
-        const t = document.getElementById("searchToggle"),
-          b = document.getElementById("searchBox"),
-          i = document.getElementById("searchInput"),
-          c = document.getElementById("searchClose"),
-          r = document.getElementById("searchResults");
-        t.addEventListener("click", () => {
-          b.classList.add("open");
-          i.focus();
-        });
-        c.addEventListener("click", () => {
-          b.classList.remove("open");
-          r.classList.remove("show");
-          i.value = "";
-        });
-        i.addEventListener("input", () => {
-          const q = i.value.trim().toLowerCase();
-          if (q.length < 2) {
-            r.classList.remove("show");
-            return;
-          }
-          buildIdx().then(() => {
-            const m = sIdx
-              .filter(
-                (x) =>
-                  (x.title || "").toLowerCase().includes(q) ||
-                  (x.detail || "").toLowerCase().includes(q) ||
-                  (x.tags || []).some((tp) => tp.toLowerCase().includes(q)),
-              )
-              .slice(0, 6);
-            r.innerHTML = m.length
-              ? m
-                  .map(
-                    (x) =>
-                      `<a href="${x.url}" class="search-item"><div class="sr-type">${se(x.type)}</div><div class="sr-title">${se(x.title)}</div></a>`,
-                  )
-                  .join("")
-              : '<div class="no-results">Nothing found</div>';
-            r.classList.add("show");
-          });
-        });
-        document.addEventListener("click", (e) => {
-          if (!e.target.closest(".search-wrap")) r.classList.remove("show");
-        });
-        async function buildIdx() {
-          if (sIdx.length) return;
-          sIdx.push(
-            { type: "Page", title: "Home", url: "index.html" },
-            { type: "Page", title: "Work & R&D", url: "work.html" },
-            { type: "Page", title: "Services", url: "services.html" },
-          );
-          try {
-            const cs = await fetch("data/case-studies.json").then((r) =>
-              r.json(),
-            );
-            cs.forEach((e) =>
-              sIdx.push({
-                type: "Case Study",
-                title: e.title,
-                detail: e.role,
-                tags: e.tech || [],
-                url: "work.html",
-              }),
-            );
-          } catch {}
-          try {
-            const bl = await fetch("data/blogs.json").then((r) => r.json());
-            bl.forEach((b) =>
-              sIdx.push({
-                type: "Blog Post",
-                title: b.title,
-                detail: b.excerpt,
-                tags: b.tags || [],
-                url: "blog/" + b.slug + ".html",
-              }),
-            );
-          } catch {}
-        }
-        function se(s) {
-          const d = document.createElement("div");
-          d.textContent = s || "";
-          return d.innerHTML;
-        }
-      })();
+      /* ---- SEARCH (shared engine: js/search.js) ---- */
+      initSiteSearch({
+        seeds: [
+          { type: "Page", title: "Home", url: "index.html" },
+          { type: "Page", title: "Work & R&D", url: "work.html" },
+          { type: "Page", title: "Services", url: "services.html" },
+          { type: "Page", title: "Products", url: "products.html" },
+        ],
+        dataFiles: [
+          {
+            file: "data/case-studies.json",
+            map: (e) => ({
+              type: "Case Study",
+              title: e.title,
+              detail: e.role,
+              url: "work.html",
+              tags: e.tech || [],
+            }),
+          },
+          {
+            file: "data/blogs.json",
+            map: (b) => ({
+              type: "Blog Post",
+              title: b.title,
+              detail: b.excerpt,
+              url: "blog/" + b.slug + ".html",
+              tags: b.tags || [],
+            }),
+          },
+        ],
+      });
 
       async function loadAllPosts() {
         const container = document.getElementById("post-list");

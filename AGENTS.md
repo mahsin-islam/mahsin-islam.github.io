@@ -7,13 +7,14 @@ Static single-page portfolio + blog + payments. **No build system, no package.js
 - `index.html` — the entire portfolio site: markup, all CSS (inline `<style>`), and the main inline script (GSAP animations, search, GitHub API, skill bars, visitor counter, typing effect, theme toggle, contact form via Formspree).
 - `blog.html` — blog listing page. Fetches `data/blogs.json` + Medium RSS proxy, renders post cards, paginates. Cards link to individual SEO-friendly pages in `blog/`.
 - `services.html` — consulting offerings, bKash/Nagad/Rocket QR payment page, and international gateway comparison table (Wise, Payoneer, Stripe, LianLianPay, Gumroad).
-- `work.html` — full case-study page with its own inline renderer + detail modal (same JSON as index).
+- `work.html` — full case-study page: uses the shared `js/render-case-studies.js` renderer + its own inline detail modal (same JSON as index).
 - `products.html` — digital-products catalog + per-product demo pages (`products.html?slug=<id>`), rendered from `data/products.json`. Buy buttons route to `index.html#contact` (Gumroad-ready).
 - `data/case-studies.json` — **source of truth for case study content.** Section `#case-study-list` is empty in the HTML and rendered entirely from this file via `js/render-case-studies.js`.
 - `data/blogs.json` — **source of truth for blog posts.** Each entry: `id`, `slug`, `title`, `date`, `excerpt`, `content` (HTML string), `category`, `tags`, `readTime`.
 - `data/products.json` — **source of truth for digital products.** Each entry: `id`, `name`, `price`, `icon`, `category`, `tagline`, `description`, `features[]`, `demo` (image path or null), `video`, `buyUrl`, `status`.
 - `data/site-config.json` — **source of truth for site-wide settings**: notice/announcement bar (date-windowed, dismissible), featured video ID, all social/profile URLs. Rendered by `js/render-site-config.js`. No HTML edits needed to change these.
 - `js/common.js` — shared utilities loaded on **every** page: footer year, theme init/toggle, mobile nav wiring, and `window.__a11y` modal-focus helpers. Do not re-implement these inline.
+- `js/search.js` — shared search engine (debounced, lazily-built index). Call `initSiteSearch({ seeds, dataFiles })` per page; do not write inline search code.
 - `js/render-case-studies.js` — fetches case studies JSON, builds entry markup with glassmorphism cards, image galleries, before/after impact bars, metric count-up animation (numeric values only), architecture diagram details.
 - `js/render-site-config.js` — notice bar + click-to-play featured-video facade from `site-config.json`. Safe no-op if JSON missing.
 - `blog/{slug}.html` — individual SEO-friendly blog post pages. Each loads content from `data/blogs.json` via JS but has hardcoded meta tags for Google. Copy a template for new posts.
