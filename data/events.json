@@ -1,0 +1,50 @@
+[
+  {
+    "id": "event-01",
+    "date": "2024-06-15",
+    "title": "Programming Contest Winner",
+    "category": "Competition",
+    "description": "First place in inter-university programming competition. Participated as team lead and solved complex algorithmic challenges.",
+    "organization": "Dhaka University",
+    "location": "Dhaka, Bangladesh",
+    "type": "achievement",
+    "image": null,
+    "certificate": null
+  },
+  {
+    "id": "event-02",
+    "date": "2024-03-20",
+    "title": "Research Paper Presentation",
+    "category": "Academic",
+    "description": "Presented published research on quantum computing at international conference. Received recognition for innovative approach.",
+    "organization": "IEEE Conference",
+    "location": "Virtual",
+    "type": "presentation",
+    "image": null,
+    "certificate": null
+  },
+  {
+    "id": "event-03",
+    "date": "2023-11-10",
+    "title": "Hackathon Mentor",
+    "category": "Community",
+    "description": "Served as technical mentor for 24-hour hackathon. Guided 5 student teams through product development and pitching.",
+    "organization": "Tech Community BD",
+    "location": "Dhaka, Bangladesh",
+    "type": "service",
+    "image": null,
+    "certificate": null
+  },
+  {
+    "id": "event-04",
+    "date": "2023-08-25",
+    "title": "Workshop Instructor",
+    "category": "Teaching",
+    "description": "Conducted full-day workshop on Flutter mobile development for 50+ participants. Covered from basics to advanced state management.",
+    "organization": "BD Tech Institute",
+    "location": "Dhaka, Bangladesh",
+    "type": "teaching",
+    "image": null,
+    "certificate": null
+  }
+]

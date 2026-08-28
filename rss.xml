@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Md. Mahsin-Ul-Islam — Technical Blog</title>
+    <link>https://mahsin-islam.github.io/blog</link>
+    <description>Deep dives on Flutter, FastAPI, FinTech, AI/ML, and software engineering from a banking-sector engineer and published researcher.</description>
+    <language>en-us</language>
+    <atom:link href="https://mahsin-islam.github.io/rss.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>10 Flutter Performance Optimizations That Actually Matter</title>
+      <link>https://mahsin-islam.github.io/blog#flutter-performance-optimization</link>
+      <guid>flutter-performance-optimization</guid>
+      <pubDate>Mon, 15 Jun 2026 00:00:00 +0600</pubDate>
+      <category>Flutter</category>
+      <description>Most Flutter optimization guides recycle the same 3 tips. Here are the ones I use in production.</description>
+    </item>
+    <item>
+      <title>What I Learned Building a Production FastAPI Backend From Scratch</title>
+      <link>https://mahsin-islam.github.io/blog#fastapi-backend-lessons</link>
+      <guid>fastapi-backend-lessons</guid>
+      <pubDate>Wed, 20 May 2026 00:00:00 +0600</pubDate>
+      <category>Backend</category>
+      <description>Dependency injection, async database sessions, background tasks with Celery, and the mistakes I made structuring a real FastAPI project.</description>
+    </item>
+    <item>
+      <title>Bangladesh FinTech 2026: What's Actually Shipping</title>
+      <link>https://mahsin-islam.github.io/blog#bangladesh-fintech-landscape-2026</link>
+      <guid>bangladesh-fintech-landscape-2026</guid>
+      <pubDate>Fri, 10 Apr 2026 00:00:00 +0600</pubDate>
+      <category>FinTech</category>
+      <description>Working inside a bank's ICT division gives a different perspective on FinTech than reading TechCrunch.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,16 @@
+{
+  "name": "Md. Mahsin-Ul-Islam | Portfolio",
+  "short_name": "Mahsin Islam",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#0B1220",
+  "description": "Software Engineer, Researcher & Educator — FinTech, EdTech, AI/ML",
+  "icons": [
+    {
+      "src": "assets/profile.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What I Learned Building a Production FastAPI Backend — Mahsin-Ul-Islam</title>
+<meta name="description" content="Dependency injection, async database sessions, background tasks with Celery, and the mistakes I made structuring a real FastAPI project for a Japanese learning platform.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0B1220">
+<link rel="canonical" href="https://mahsin-islam.github.io/blog/fastapi-backend-lessons">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What I Learned Building a Production FastAPI Backend From Scratch">
+<meta property="og:description" content="Dependency injection, async database sessions, background tasks with Celery.">
+<meta property="og:url" content="https://mahsin-islam.github.io/blog/fastapi-backend-lessons">
+<meta property="og:site_name" content="Md. Mahsin-Ul-Islam">
+<meta property="article:published_time" content="2026-05-20">
+<meta property="article:tag" content="Backend">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%230B1220%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23CBA135%22 font-family=%22serif%22>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+<style>
+:root{--ink:#0B1220;--ink-2:#0F1830;--ink-3:#131F3B;--hairline:#24304A;--hairline-soft:#1B2740;--text:#EDEFF5;--text-dim:#9AA6C0;--text-faint:#5E6B89;--brass:#CBA135;--brass-soft:#8A7332;--teal:#4CB6A8;--serif:'Fraunces',Georgia,serif;--mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif}
+[data-theme="light"]{--ink:#F2EEE1;--ink-2:#FBF9F2;--ink-3:#EEE8D6;--hairline:#D9D0B4;--hairline-soft:#E6DFC7;--text:#2A2416;--text-dim:#5C5340;--text-faint:#8C8368;--brass:#8A6A1E;--brass-soft:#B4922F;--teal:#0E7C6D}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--ink);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased;transition:background .3s ease,color .3s ease}
+a{color:inherit}:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+header{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--ink)88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--hairline-soft)}
+nav{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:900px;margin:0 auto;padding:0 28px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:14px;text-decoration:none}
+.brand .mark{width:28px;height:28px;border-radius:6px;border:1px solid var(--brass-soft);display:flex;align-items:center;justify-content:center;font-family:var(--serif);color:var(--brass);font-size:15px;font-weight:600}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{font-size:13.5px;color:var(--text-dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--brass)}
+.nav-cta{font-family:var(--mono);font-size:11.5px;color:var(--ink);background:var(--brass);padding:7px 14px;border-radius:5px;text-decoration:none;font-weight:600;transition:opacity .2s;white-space:nowrap}
+.nav-cta:hover{opacity:.85}
+.theme-toggle{width:38px;height:38px;border-radius:50%;border:1px solid var(--hairline);background:var(--ink-2);cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative;margin-left:12px}
+.theme-toggle:hover{border-color:var(--brass-soft)}
+.theme-toggle svg{width:17px;height:17px}
+.icon-moon{color:var(--brass);transition:opacity .35s ease,transform .5s ease}
+.icon-sun{color:var(--brass);position:absolute;opacity:0;transform:rotate(-90deg) scale(.5);transition:opacity .35s ease,transform .5s ease}
+[data-theme="light"] .icon-moon{opacity:0;transform:rotate(90deg) scale(.5)}
+[data-theme="light"] .icon-sun{opacity:1;transform:rotate(0) scale(1)}
+main{max-width:800px;margin:0 auto;padding:60px 28px 40px}
+.post-thumb{border:1px solid var(--hairline);border-radius:12px;overflow:hidden;margin-bottom:32px;max-height:360px;background:var(--ink-3)}
+.post-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.post-thumb .thumb-placeholder{height:180px;display:flex;align-items:center;justify-content:center;color:var(--brass-soft);font-size:36px}
+.back-link{font-family:var(--mono);font-size:13px;color:var(--brass);text-decoration:none;display:inline-flex;align-items:center;gap:6px;margin-bottom:24px;transition:opacity .2s}
+.back-link:hover{opacity:.8}
+.post-cat{font-family:var(--mono);font-size:11px;color:var(--brass);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+h1{font-family:var(--serif);font-size:clamp(22px,3.2vw,34px);font-weight:500;line-height:1.2;margin-bottom:14px}
+.post-meta{font-family:var(--mono);font-size:12px;color:var(--text-faint);margin-bottom:36px;display:flex;gap:16px;align-items:center}
+.content{color:var(--text-dim);font-size:15.5px;line-height:1.85}
+.content h3{font-family:var(--serif);font-size:20px;color:var(--text);margin:36px 0 12px;font-weight:500}
+.content h3:first-of-type{margin-top:0}
+.content p{margin-bottom:18px}
+.content code{font-family:var(--mono);font-size:13px;background:var(--ink-3);padding:2px 6px;border-radius:4px;color:var(--brass)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
+.tags span{font-family:var(--mono);font-size:11px;border:1px solid var(--hairline);padding:5px 10px;border-radius:5px;color:var(--text-dim)}
+footer{border-top:1px solid var(--hairline-soft);padding:36px 0;margin-top:40px}
+.footer-row{max-width:900px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-family:var(--mono);font-size:12px;color:var(--text-faint)}
+.footer-social{display:flex;gap:16px}
+.footer-social a{color:var(--text-faint);font-size:15px;transition:color .2s}
+.footer-social a:hover{color:var(--brass)}
+
+.cta-strip-post{border:1px solid var(--brass-soft); border-radius:14px; background:linear-gradient(135deg,color-mix(in srgb,var(--brass)8%,var(--ink-2)),var(--ink-2)); padding:clamp(22px,4vw,32px); text-align:center; margin:40px 0; max-width:800px}
+.cta-strip-post h3{font-size:clamp(17px,2.5vw,24px); margin-bottom:6px; font-family:var(--serif); font-weight:500}
+.cta-strip-post p{color:var(--text-dim); font-size:13px; margin-bottom:18px}
+.cta-strip-post .cta-btns{display:flex; gap:8px; justify-content:center; flex-wrap:wrap}
+.cta-strip-post .cta-btn{font-family:var(--mono); font-size:11.5px; padding:9px 16px; border-radius:6px; text-decoration:none; display:inline-flex; align-items:center; gap:6px; transition:all .2s}
+.cta-btn-p{background:var(--brass); color:var(--ink); font-weight:600}.cta-btn-p:hover{opacity:.85; transform:translateY(-1px)}
+.cta-btn-o{border:1px solid var(--brass-soft); color:var(--brass)}.cta-btn-o:hover{border-color:var(--brass); background:color-mix(in srgb,var(--brass)8%,transparent)}
+</style>
+</head>
+<body data-theme="dark">
+<header>
+  <nav>
+    <a href="../index.html" class="brand"><span class="mark">M</span> Mahsin-Ul-Islam</a>
+    <ul class="nav-links">
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../blog.html">Blog</a></li>
+      <li><a href="../services.html">Services</a></li>
+      <li><a href="../work.html">Work &amp; R&amp;D</a></li>
+      <li><a href="../index.html#contact">Contact</a></li>
+    </ul>
+    <a href="../services.html#book" class="nav-cta">Book a call</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+    </button>
+  </nav>
+</header>
+<main>
+  <a href="../blog" class="back-link"><i class="fas fa-arrow-left"></i> All posts</a>
+  <div id="post-content">Loading…</div>
+</main>
+
+<div class="cta-strip-post">
+  <h3>Ready to work together?</h3>
+  <p>Whether you need a software system built, a technical review, or your next YouTube video edited — let's talk.</p>
+  <div class="cta-btns">
+    <a href="../index.html#contact" class="cta-btn cta-btn-p"><i class="fas fa-paper-plane"></i> Hire Me</a>
+    <a href="../services.html#book" class="cta-btn cta-btn-o"><i class="fas fa-calendar-alt"></i> Book a Consultation</a>
+    <a href="../index.html#work" class="cta-btn cta-btn-o"><i class="fas fa-briefcase"></i> View Portfolio</a>
+    <a href="../services.html#courses" class="cta-btn cta-btn-o"><i class="fas fa-graduation-cap"></i> Buy Courses</a>
+    <a href="../blog.html" class="cta-btn cta-btn-o"><i class="fas fa-book-open"></i> Read Blog</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-row">
+    <span>&copy; <span id="year"></span> Md. Mahsin-Ul-Islam · Dhaka, Bangladesh</span>
+    <div class="footer-social">
+      <a href="https://github.com/mahsin-islam" target="_blank" rel="noopener" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.youtube.com/@mahsintheeducator" target="_blank" rel="noopener" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.linkedin.com/in/mahsinislam/" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </div>
+</footer>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+const b=document.body;document.getElementById('themeToggle').addEventListener('click',()=>{const t=b.getAttribute('data-theme')==='dark'?'light':'dark';b.setAttribute('data-theme',t);localStorage.setItem('theme',t)});
+const saved=localStorage.getItem('theme');if(saved)b.setAttribute('data-theme',saved);
+
+const slug='fastapi-backend-lessons';
+fetch('../data/blogs.json').then(r=>r.json()).then(posts=>{
+  const p=posts.find(x=>x.slug===slug);
+  if(!p){document.getElementById('post-content').textContent='Post not found.';return}
+  document.getElementById('post-content').innerHTML=
+    (p.thumbnail?`<div class="post-thumb"><img src="../${p.thumbnail}" alt="" loading="lazy"></div>`:'')+
+    '<div class="post-cat">'+esc(p.category)+'</div>'+
+    '<h1>'+esc(p.title)+'</h1>'+
+    '<div class="post-meta"><span>'+fmt(p.date)+'</span><span>'+p.readTime+'</span></div>'+
+    '<div class="content">'+p.content+'</div>'+
+    '<div class="tags">'+p.tags.map(t=>'<span>'+esc(t)+'</span>').join('')+'</div>';
+}).catch(()=>{document.getElementById('post-content').innerHTML='<h1>What I Learned Building a Production FastAPI Backend From Scratch</h1><div class="post-meta">May 20, 2026 &middot; 5 min read</div><p style="color:var(--text-dim)">Content could not be loaded. <a href="../blog" style="color:var(--brass)">Browse all posts</a>.</p>';});
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+function fmt(d){return new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})}
+</script>
+</body>
+</html>

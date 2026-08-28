@@ -1,0 +1,1195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Blog — Md. Mahsin-Ul-Islam | Software Engineer &amp; Researcher
+    </title>
+    <meta
+      name="description"
+      content="Technical blog covering Flutter, FastAPI, FinTech, AI/ML, and software engineering. Published researcher, banking-sector engineer."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0B1220" />
+    <link rel="canonical" href="https://mahsin-islam.github.io/blog" />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Blog — Md. Mahsin-Ul-Islam | Software Engineer &amp; Researcher"
+    />
+    <meta
+      property="og:description"
+      content="Technical blog covering Flutter, FastAPI, FinTech, AI/ML, and software engineering."
+    />
+    <meta property="og:url" content="https://mahsin-islam.github.io/blog" />
+    <meta property="og:site_name" content="Md. Mahsin-Ul-Islam" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%230B1220%22/><text x=%2250%22 y=%2268%22 font-size=%2258%22 text-anchor=%22middle%22 fill=%22%23CBA135%22 font-family=%22serif%22>M</text></svg>"
+    />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --ink: #0b1220;
+        --ink-2: #0f1830;
+        --ink-3: #131f3b;
+        --hairline: #24304a;
+        --hairline-soft: #1b2740;
+        --text: #edeff5;
+        --text-dim: #9aa6c0;
+        --text-faint: #5e6b89;
+        --brass: #cba135;
+        --brass-soft: #8a7332;
+        --brass-glow: rgba(203, 161, 53, 0.28);
+        --teal: #4cb6a8;
+        --radius: 10px;
+        --wrap: 1080px;
+        --serif: "Fraunces", Georgia, serif;
+        --mono: "JetBrains Mono", monospace;
+        --sans: "Inter", sans-serif;
+      }
+      [data-theme="light"] {
+        --ink: #f2eee1;
+        --ink-2: #fbf9f2;
+        --ink-3: #eee8d6;
+        --hairline: #d9d0b4;
+        --hairline-soft: #e6dfc7;
+        --text: #2a2416;
+        --text-dim: #5c5340;
+        --text-faint: #8c8368;
+        --brass: #8a6a1e;
+        --brass-soft: #b4922f;
+        --teal: #0e7c6d;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      body {
+        background: var(--ink);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        transition:
+          background 0.3s ease,
+          color 0.3s ease;
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 2px solid var(--brass);
+        outline-offset: 3px;
+      }
+      .wrap {
+        max-width: var(--wrap);
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        background: var(--brass);
+        color: var(--ink);
+        padding: 10px 16px;
+        z-index: 300;
+        font-family: var(--mono);
+        font-size: 13px;
+      }
+      .skip-link:focus {
+        left: 12px;
+        top: 12px;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: color-mix(in srgb, var(--ink) 88%, transparent);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--hairline-soft);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 64px;
+        max-width: var(--wrap);
+        margin: 0 auto;
+        padding: 0 28px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--mono);
+        font-size: 14px;
+        text-decoration: none;
+      }
+      .brand .mark {
+        width: 28px;
+        height: 28px;
+        border-radius: 6px;
+        border: 1px solid var(--brass-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--serif);
+        color: var(--brass);
+        font-size: 15px;
+        font-weight: 600;
+      }
+      .nav-links {
+        display: flex;
+        gap: 24px;
+        list-style: none;
+      }
+      .nav-links a {
+        font-size: 13.5px;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--brass);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nav-cta {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--ink);
+        background: var(--brass);
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.2s;
+        white-space: nowrap;
+      }
+      .nav-cta:hover {
+        opacity: 0.85;
+      }
+      .theme-toggle {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        border: 1px solid var(--hairline);
+        background: var(--ink-2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        transition: border-color 0.2s;
+      }
+      .theme-toggle:hover {
+        border-color: var(--brass-soft);
+      }
+      .theme-toggle svg {
+        width: 17px;
+        height: 17px;
+      }
+      .icon-moon {
+        color: var(--brass);
+        transition:
+          opacity 0.35s ease,
+          transform 0.5s ease;
+      }
+      .icon-sun {
+        color: var(--brass);
+        position: absolute;
+        opacity: 0;
+        transform: rotate(-90deg) scale(0.5);
+        transition:
+          opacity 0.35s ease,
+          transform 0.5s ease;
+      }
+      [data-theme="light"] .icon-moon {
+        opacity: 0;
+        transform: rotate(90deg) scale(0.5);
+      }
+      [data-theme="light"] .icon-sun {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+      }
+      .mobile-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--text);
+        font-size: 20px;
+        cursor: pointer;
+      }
+      @media (max-width: 800px) {
+        .nav-links {
+          display: none;
+        }
+        .mobile-toggle {
+          display: block;
+        }
+        .nav-links.open {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          top: 64px;
+          left: 0;
+          right: 0;
+          background: var(--ink-2);
+          padding: 20px 28px;
+          gap: 16px;
+          border-bottom: 1px solid var(--hairline);
+        }
+      }
+
+      section {
+        padding: 80px 0;
+        position: relative;
+        z-index: 1;
+      }
+      .eyebrow {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--brass);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 18px;
+      }
+      .eyebrow::before {
+        content: "";
+        width: 20px;
+        height: 1px;
+        background: var(--brass-soft);
+      }
+      h1,
+      h2 {
+        font-family: var(--serif);
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      h2 {
+        font-size: clamp(26px, 3.2vw, 36px);
+        margin-bottom: 10px;
+      }
+      .section-lede {
+        color: var(--text-dim);
+        font-size: 16px;
+        max-width: 600px;
+        margin-bottom: 44px;
+      }
+
+      /* Blog cards */
+      .post-card {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        background: var(--ink-2);
+        margin-bottom: 16px;
+        overflow: hidden;
+        text-decoration: none;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+      .post-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--brass-soft);
+        box-shadow:
+          0 8px 30px rgba(0, 0, 0, 0.2),
+          0 0 60px var(--brass-glow);
+      }
+      .post-card-thumb {
+        min-height: 150px;
+        background: var(--ink-3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+      .post-card-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .post-card-thumb .thumb-icon {
+        font-size: 28px;
+        color: var(--brass);
+      }
+      .post-card-body {
+        padding: 22px 24px;
+        display: flex;
+        flex-direction: column;
+      }
+      .post-card-body .pc-cat {
+        font-family: var(--mono);
+        font-size: 10.5px;
+        color: var(--brass);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+      .post-card-body h3 {
+        font-family: var(--serif);
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 6px;
+        color: var(--text);
+        line-height: 1.3;
+      }
+      .post-card-body .pc-excerpt {
+        color: var(--text-dim);
+        font-size: 14px;
+        line-height: 1.6;
+        flex: 1;
+      }
+      .post-card-meta {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        font-family: var(--mono);
+        font-size: 11px;
+        color: var(--text-faint);
+        margin-top: 12px;
+      }
+      .post-card-meta .pc-tag {
+        color: var(--teal);
+      }
+      .source-badge {
+        font-family: var(--mono);
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        display: inline-block;
+      }
+      .source-medium {
+        background: color-mix(in srgb, var(--teal) 15%, transparent);
+        color: var(--teal);
+        border: 1px solid color-mix(in srgb, var(--teal) 30%, transparent);
+      }
+      .source-local {
+        background: color-mix(in srgb, var(--brass) 15%, transparent);
+        color: var(--brass);
+        border: 1px solid color-mix(in srgb, var(--brass) 30%, transparent);
+      }
+      @media (max-width: 620px) {
+        .post-card {
+          grid-template-columns: 1fr;
+        }
+        .post-card-thumb {
+          height: 160px;
+        }
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 0;
+        border: 1px solid var(--hairline);
+        border-radius: 12px;
+        background: var(--ink-2);
+      }
+      .empty-state p {
+        color: var(--text-faint);
+        font-family: var(--mono);
+        font-size: 13px;
+      }
+
+      footer {
+        border-top: 1px solid var(--hairline-soft);
+        padding: 36px 0;
+        position: relative;
+        z-index: 1;
+      }
+      .footer-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-faint);
+      }
+      .footer-social {
+        display: flex;
+        gap: 16px;
+      }
+      .footer-social a {
+        color: var(--text-faint);
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+      .footer-social a:hover {
+        color: var(--brass);
+      }
+      .rss-link {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--brass);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .rss-link:hover {
+        text-decoration: underline;
+      }
+
+      .search-wrap {
+        position: relative;
+      }
+      .search-toggle {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        border: 1px solid var(--hairline);
+        background: var(--ink-2);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-dim);
+        font-size: 13px;
+        transition: border-color 0.2s;
+      }
+      .search-toggle:hover {
+        border-color: var(--brass-soft);
+        color: var(--brass);
+      }
+      .search-box {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 0;
+        overflow: hidden;
+        transition: width 0.3s ease;
+        background: var(--ink-2);
+        border-radius: 8px;
+      }
+      .search-box.open {
+        width: 200px;
+        border: 1px solid var(--hairline);
+      }
+      .search-box input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: var(--text);
+        font-family: var(--mono);
+        font-size: 13px;
+        padding: 7px 32px 7px 10px;
+        outline: none;
+      }
+      .search-box .search-close {
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-faint);
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .search-results {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        width: 340px;
+        max-height: 360px;
+        overflow-y: auto;
+        background: var(--ink-2);
+        border: 1px solid var(--hairline);
+        border-radius: 10px;
+        display: none;
+        z-index: 150;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+      }
+      .search-results.show {
+        display: block;
+      }
+      .search-item {
+        display: block;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--hairline-soft);
+        text-decoration: none;
+        transition: background 0.15s;
+        font-size: 13px;
+      }
+      .search-item:hover {
+        background: var(--ink-3);
+      }
+      .search-item .sr-type {
+        font-family: var(--mono);
+        font-size: 10px;
+        color: var(--brass);
+        letter-spacing: 0.06em;
+      }
+      .search-item .sr-title {
+        font-size: 14px;
+        color: var(--text);
+        margin-top: 2px;
+      }
+      .no-results {
+        padding: 20px;
+        text-align: center;
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-faint);
+      }
+      @media (max-width: 600px) {
+        .search-results {
+          width: calc(100vw - 40px);
+          right: -100px;
+        }
+      }
+
+      .cta-strip-blog {
+        border: 1px solid var(--brass-soft);
+        border-radius: 14px;
+        background: linear-gradient(
+          135deg,
+          color-mix(in srgb, var(--brass) 8%, var(--ink-2)),
+          var(--ink-2)
+        );
+        padding: clamp(24px, 4vw, 40px);
+        text-align: center;
+        margin: 0 28px 40px;
+        max-width: var(--wrap);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .cta-strip-blog h3 {
+        font-size: clamp(18px, 2.5vw, 26px);
+        margin-bottom: 8px;
+        font-family: var(--serif);
+        font-weight: 500;
+      }
+      .cta-strip-blog p {
+        color: var(--text-dim);
+        font-size: 14px;
+        margin-bottom: 20px;
+      }
+      .cta-strip-blog .cta-btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .cta-strip-blog .cta-btn {
+        font-family: var(--mono);
+        font-size: 12px;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+      }
+      .cta-btn-p {
+        background: var(--brass);
+        color: var(--ink);
+        font-weight: 600;
+      }
+      .cta-btn-p:hover {
+        opacity: 0.85;
+        transform: translateY(-1px);
+      }
+      .cta-btn-o {
+        border: 1px solid var(--brass-soft);
+        color: var(--brass);
+      }
+      .cta-btn-o:hover {
+        border-color: var(--brass);
+        background: color-mix(in srgb, var(--brass) 8%, transparent);
+      }
+    </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-K1C6HFSC4C"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-K1C6HFSC4C");
+    </script>
+
+    <script type="text/javascript">
+      (function (c, l, a, r, i, t, y) {
+        c[a] =
+          c[a] ||
+          function () {
+            (c[a].q = c[a].q || []).push(arguments);
+          };
+        t = l.createElement(r);
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/" + i;
+        y = l.getElementsByTagName(r)[0];
+        y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "xtj7i8cyjj");
+    </script>
+  </head>
+  <body data-theme="dark">
+    <a href="#main" class="skip-link">Skip to content</a>
+    <header>
+      <nav aria-label="Primary">
+        <a href="index.html" class="brand"
+          ><span class="mark">M</span> Mahsin-Ul-Islam</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="work.html">Work &amp; R&amp;D</a></li>
+          <li><a href="blog.html" class="active">Blog</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        </ul>
+        <div class="nav-right">
+          <div class="search-wrap">
+            <button class="search-toggle" id="searchToggle" aria-label="Search">
+              <i class="fas fa-search"></i>
+            </button>
+            <div class="search-box" id="searchBox">
+              <input type="text" id="searchInput" placeholder="Search..." />
+              <button class="search-close" id="searchClose">&times;</button>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+          </div>
+          <a href="services.html#book" class="nav-cta">Book a call</a>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Toggle theme"
+          >
+            <svg
+              class="icon-moon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg
+              class="icon-sun"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+              />
+            </svg>
+          </button>
+          <button
+            class="mobile-toggle"
+            id="mobileToggle"
+            aria-label="Toggle menu"
+            aria-expanded="false"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section>
+        <div class="wrap">
+          <div class="eyebrow">Writing</div>
+          <h2>Technical Blog</h2>
+          <p class="section-lede">
+            Deep dives on Flutter, FastAPI, FinTech, AI/ML, and what I learn
+            building in production. Also pulling latest from
+            <a
+              href="https://medium.com/@mahsin.islam"
+              target="_blank"
+              rel="noopener"
+              style="color: var(--brass)"
+              >Medium</a
+            >.
+            <a href="rss.xml" class="rss-link"
+              ><i class="fas fa-rss"></i> RSS</a
+            >
+          </p>
+          <div id="post-list">
+            <div class="empty-state"><p>Loading posts…</p></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="cta-strip-blog">
+      <h3>Ready to work together?</h3>
+      <p>
+        Whether you need a software system built, a technical review, or your
+        next YouTube video edited — let's talk.
+      </p>
+      <div class="cta-btns">
+        <a href="index.html#contact" class="cta-btn cta-btn-p"
+          ><i class="fas fa-paper-plane"></i> Hire Me</a
+        >
+        <a href="services.html#book" class="cta-btn cta-btn-o"
+          ><i class="fas fa-calendar-alt"></i> Book a Consultation</a
+        >
+        <a href="index.html#work" class="cta-btn cta-btn-o"
+          ><i class="fas fa-briefcase"></i> View Portfolio</a
+        >
+        <a href="services.html#courses" class="cta-btn cta-btn-o"
+          ><i class="fas fa-graduation-cap"></i> Buy Courses</a
+        >
+        <a href="blog.html" class="cta-btn cta-btn-o"
+          ><i class="fas fa-book-open"></i> Read Blog</a
+        >
+      </div>
+    </div>
+
+    <footer>
+      <div class="wrap footer-row">
+        <span
+          >&copy; <span id="year"></span> Md. Mahsin-Ul-Islam · Dhaka,
+          Bangladesh</span
+        >
+        <div class="footer-social">
+          <a
+            href="https://github.com/mahsin-islam"
+            target="_blank"
+            rel="noopener"
+            aria-label="GitHub"
+            ><i class="fab fa-github"></i
+          ></a>
+          <a
+            href="https://www.youtube.com/@mahsintheeducator"
+            target="_blank"
+            rel="noopener"
+            aria-label="YouTube"
+            ><i class="fab fa-youtube"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/mahsinislam/"
+            target="_blank"
+            rel="noopener"
+            aria-label="LinkedIn"
+            ><i class="fab fa-linkedin"></i
+          ></a>
+          <a
+            href="https://medium.com/@mahsin.islam"
+            target="_blank"
+            rel="noopener"
+            aria-label="Medium"
+            ><i class="fab fa-medium"></i
+          ></a>
+          <a
+            href="https://www.facebook.com/mahsintheeducator/"
+            target="_blank"
+            rel="noopener"
+            aria-label="Facebook"
+            ><i class="fab fa-facebook"></i
+          ></a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+      const body = document.body;
+
+      /* mobile nav */
+      const mtoggle = document.getElementById("mobileToggle");
+      const links = document.getElementById("navLinks");
+      mtoggle.addEventListener("click", () => {
+        const open = links.classList.toggle("open");
+        mtoggle.setAttribute("aria-expanded", open);
+      });
+      links.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => {
+          links.classList.remove("open");
+          mtoggle.setAttribute("aria-expanded", "false");
+        }),
+      );
+
+      /* theme toggle */
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const t = body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        body.setAttribute("data-theme", t);
+        localStorage.setItem("theme", t);
+      });
+      const saved = localStorage.getItem("theme");
+      if (saved) body.setAttribute("data-theme", saved);
+
+      /* ---- SEARCH ---- */
+      let sIdx = [];
+      (function () {
+        const t = document.getElementById("searchToggle"),
+          b = document.getElementById("searchBox"),
+          i = document.getElementById("searchInput"),
+          c = document.getElementById("searchClose"),
+          r = document.getElementById("searchResults");
+        t.addEventListener("click", () => {
+          b.classList.add("open");
+          i.focus();
+        });
+        c.addEventListener("click", () => {
+          b.classList.remove("open");
+          r.classList.remove("show");
+          i.value = "";
+        });
+        i.addEventListener("input", () => {
+          const q = i.value.trim().toLowerCase();
+          if (q.length < 2) {
+            r.classList.remove("show");
+            return;
+          }
+          buildIdx().then(() => {
+            const m = sIdx
+              .filter(
+                (x) =>
+                  (x.title || "").toLowerCase().includes(q) ||
+                  (x.detail || "").toLowerCase().includes(q) ||
+                  (x.tags || []).some((tp) => tp.toLowerCase().includes(q)),
+              )
+              .slice(0, 6);
+            r.innerHTML = m.length
+              ? m
+                  .map(
+                    (x) =>
+                      `<a href="${x.url}" class="search-item"><div class="sr-type">${se(x.type)}</div><div class="sr-title">${se(x.title)}</div></a>`,
+                  )
+                  .join("")
+              : '<div class="no-results">Nothing found</div>';
+            r.classList.add("show");
+          });
+        });
+        document.addEventListener("click", (e) => {
+          if (!e.target.closest(".search-wrap")) r.classList.remove("show");
+        });
+        async function buildIdx() {
+          if (sIdx.length) return;
+          sIdx.push(
+            { type: "Page", title: "Home", url: "index.html" },
+            { type: "Page", title: "Work & R&D", url: "work.html" },
+            { type: "Page", title: "Services", url: "services.html" },
+          );
+          try {
+            const cs = await fetch("data/case-studies.json").then((r) =>
+              r.json(),
+            );
+            cs.forEach((e) =>
+              sIdx.push({
+                type: "Case Study",
+                title: e.title,
+                detail: e.role,
+                tags: e.tech || [],
+                url: "work.html",
+              }),
+            );
+          } catch {}
+          try {
+            const bl = await fetch("data/blogs.json").then((r) => r.json());
+            bl.forEach((b) =>
+              sIdx.push({
+                type: "Blog Post",
+                title: b.title,
+                detail: b.excerpt,
+                tags: b.tags || [],
+                url: "blog/" + b.slug + ".html",
+              }),
+            );
+          } catch {}
+        }
+        function se(s) {
+          const d = document.createElement("div");
+          d.textContent = s || "";
+          return d.innerHTML;
+        }
+      })();
+
+      async function loadAllPosts() {
+        const container = document.getElementById("post-list");
+        let allPosts = [];
+        const POSTS_PER_PAGE = 6;
+        let currentPage = 1;
+        let displayedPosts = [];
+
+        // Local blog posts
+        try {
+          const res = await fetch("data/blogs.json");
+          if (res.ok) {
+            const local = await res.json();
+            allPosts.push(
+              ...local.map((p) => ({
+                ...p,
+                source: "local",
+                url: "blog/" + p.slug + ".html",
+              })),
+            );
+          }
+        } catch (err) {
+          console.warn("Local blogs fetch failed:", err);
+        }
+
+        // Medium RSS via RSS2JSON proxy with fallback
+        try {
+          console.log("Attempting to fetch Medium RSS...");
+          const rssRes = await fetch(
+            "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@mahsin.islam",
+          );
+          console.log("Medium RSS response status:", rssRes.status);
+
+          if (rssRes.ok) {
+            const data = await rssRes.json();
+            console.log("Medium RSS data received:", data);
+
+            if (data.items && data.items.length > 0) {
+              data.items.forEach((item) => {
+                const imgMatch = item.description?.match(
+                  /<img[^>]+src="([^"]+)"/,
+                );
+                const snippetMatch = item.description?.match(
+                  /<p[^>]*class="medium-feed-snippet"[^>]*>(.*?)<\/p>/,
+                );
+                allPosts.push({
+                  id: item.guid,
+                  slug: item.link.split("?")[0].split("/").pop() || item.guid,
+                  title: item.title.replace(/^\[CDATA\[|\]\]$/g, ""),
+                  date: item.pubDate,
+                  excerpt: snippetMatch
+                    ? snippetMatch[1].replace(/<[^>]+>/g, "").trim()
+                    : item.description
+                        ?.replace(/<[^>]+>/g, "")
+                        .substring(0, 200) + "…" || "",
+                  category: item.categories?.[0] || "Tech",
+                  tags: item.categories || [],
+                  readTime: "Medium",
+                  thumbnail: imgMatch ? imgMatch[1] : null,
+                  source: "medium",
+                  url: item.link,
+                  content: null,
+                });
+              });
+              console.log("Medium posts added:", data.items.length);
+            } else {
+              console.log("No Medium items found");
+            }
+          } else {
+            console.log("Medium RSS fetch failed with status:", rssRes.status);
+          }
+        } catch (err) {
+          console.warn("Medium RSS fetch failed:", err);
+          // Add fallback Medium posts for testing
+          allPosts.push({
+            id: "medium-fallback-1",
+            slug: "medium-fallback-1",
+            title: "Latest from Medium - Visit for more content",
+            date: new Date().toISOString(),
+            excerpt: "Visit my Medium profile for the latest articles on programming, software engineering, and technology trends.",
+            category: "Tech",
+            tags: ["Programming", "Software Engineering"],
+            readTime: "Medium",
+            thumbnail: null,
+            source: "medium",
+            url: "https://medium.com/@mahsin.islam",
+            content: null,
+          });
+        }
+
+        // Sort by date
+        allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        displayedPosts = allPosts;
+
+        if (!allPosts.length) {
+          container.innerHTML =
+            '<div style="padding: 32px; text-align: center; max-width: 500px; margin: 0 auto;"><h3 style="color: var(--brass); margin-bottom: 16px;">Blog Posts Preview</h3><p style="font-family: var(--mono); font-size: 13px; color: var(--text-dim); margin-bottom: 20px;"><strong>Local Development Mode:</strong> Blog posts require a local server to preview.</p><div style="background: var(--ink-2); border: 1px solid var(--hairline); border-radius: 8px; padding: 16px; text-align: left;"><p style="font-size: 13px; margin-bottom: 12px;"><strong>Quick Fix:</strong></p><code style="display: block; background: var(--ink); padding: 12px; border-radius: 6px; font-size: 12px; margin-bottom: 12px;">python -m http.server 8000</code><p style="font-size: 12px; color: var(--text-faint);">Then visit: <a href="http://localhost:8000/blog.html" target="_blank" style="color: var(--brass);">http://localhost:8000/blog.html</a></p></div><p style="font-size: 12px; color: var(--text-faint); margin-top: 16px;">On GitHub Pages, blog posts load automatically including Medium integration.</p></div>';
+          return;
+        }
+
+        function renderPosts(page) {
+          const start = (page - 1) * POSTS_PER_PAGE;
+          const end = start + POSTS_PER_PAGE;
+          const pagePosts = displayedPosts.slice(start, end);
+
+          container.innerHTML = pagePosts
+            .map((p) => {
+              const thumb = p.thumbnail
+                ? `<img src="${p.thumbnail}" alt="" loading="lazy" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-file-lines thumb-icon\\'></i>'">`
+                : `<i class="fas ${p.source === "medium" ? "fab fa-medium" : "fas fa-file-lines"} thumb-icon"></i>`;
+              const srcBadge =
+                p.source === "medium"
+                  ? '<div class="pc-cat"><span class="source-badge source-medium">MEDIUM</span> ' +
+                    esc(p.category) +
+                    "</div>"
+                  : '<div class="pc-cat"><span class="source-badge source-local">BLOG</span> ' +
+                    esc(p.category) +
+                    "</div>";
+              return `<a href="${p.url}" target="${p.source === "medium" ? "_blank" : "_self"}" rel="${p.source === "medium" ? "noopener" : ""}" class="post-card">
+          <div class="post-card-thumb">${thumb}</div>
+          <div class="post-card-body">
+            ${srcBadge}
+            <h3>${esc(p.title)}</h3>
+            <div class="pc-excerpt">${esc(p.excerpt || "")}</div>
+            <div class="post-card-meta">
+              <span>${fmtDate(p.date)}</span><span>${p.readTime}</span>
+              ${p.tags?.[0] ? `<span class="pc-tag">${esc(p.tags[0])}</span>` : ""}
+            </div>
+          </div>
+        </a>`;
+            })
+            .join("");
+
+          renderPagination();
+        }
+
+        function renderPagination() {
+          const totalPages = Math.ceil(displayedPosts.length / POSTS_PER_PAGE);
+          if (totalPages <= 1) return;
+
+          const pagination = document.createElement("div");
+          pagination.className = "pagination";
+          pagination.style.cssText = "display: flex; justify-content: center; align-items: center; gap: 8px; margin-top: 32px;";
+
+          // Previous button
+          const prevBtn = document.createElement("button");
+          prevBtn.innerHTML = '<i class="fas fa-chevron-left"></i> Previous';
+          prevBtn.disabled = currentPage === 1;
+          prevBtn.style.cssText = "padding: 8px 16px; border: 1px solid var(--hairline); background: var(--ink-2); color: var(--text); border-radius: 6px; cursor: pointer; font-size: 13px;";
+          if (currentPage === 1) prevBtn.style.opacity = "0.5";
+          prevBtn.addEventListener("click", () => {
+            if (currentPage > 1) {
+              currentPage--;
+              renderPosts(currentPage);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+
+          // Page numbers
+          for (let i = 1; i <= totalPages; i++) {
+            const pageBtn = document.createElement("button");
+            pageBtn.textContent = i;
+            pageBtn.style.cssText = `padding: 8px 12px; border: 1px solid ${i === currentPage ? "var(--brass)" : "var(--hairline)"}; background: ${i === currentPage ? "var(--brass)" : "var(--ink-2)"}; color: ${i === currentPage ? "var(--ink)" : "var(--text)"}; border-radius: 6px; cursor: pointer; font-size: 13px;`;
+            pageBtn.addEventListener("click", () => {
+              currentPage = i;
+              renderPosts(currentPage);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+            pagination.appendChild(pageBtn);
+          }
+
+          // Next button
+          const nextBtn = document.createElement("button");
+          nextBtn.innerHTML = 'Next <i class="fas fa-chevron-right"></i>';
+          nextBtn.disabled = currentPage === totalPages;
+          nextBtn.style.cssText = "padding: 8px 16px; border: 1px solid var(--hairline); background: var(--ink-2); color: var(--text); border-radius: 6px; cursor: pointer; font-size: 13px;";
+          if (currentPage === totalPages) nextBtn.style.opacity = "0.5";
+          nextBtn.addEventListener("click", () => {
+            if (currentPage < totalPages) {
+              currentPage++;
+              renderPosts(currentPage);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+          });
+
+          pagination.insertBefore(prevBtn, pagination.firstChild);
+          pagination.appendChild(nextBtn);
+          container.parentNode.insertBefore(pagination, container.nextSibling);
+        }
+
+        // Initial render
+        renderPosts(currentPage);
+      }
+
+      function esc(s) {
+        const d = document.createElement("div");
+        d.textContent = s || "";
+        return d.innerHTML;
+      }
+      function fmtDate(d) {
+        try {
+          return new Date(d).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          });
+        } catch {
+          return d;
+        }
+      }
+
+      loadAllPosts();
+    </script>
+
+<!-- Giscus Comments - Only loads on GitHub Pages or proper domains -->
+<script>
+  (function() {
+    // Only load giscus on GitHub Pages or production domains
+    const isGitHubPages = window.location.hostname === 'mahsin-islam.github.io';
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+
+    if (isGitHubPages || (isLocalhost && window.location.protocol === 'https:')) {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', 'MAHSIN-ISLAM/mahsin-islam.github.io');
+      script.setAttribute('data-repo-id', 'MDEwOlJlcG9zaXRvcnk0NzQ0MzczNg==');
+      script.setAttribute('data-category', 'General');
+      script.setAttribute('data-category-id', 'DIC_kwDOAtPvGM4DCKmC');
+      script.setAttribute('data-mapping', 'pathname');
+      script.setAttribute('data-strict', '0');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata', '0');
+      script.setAttribute('data-input-position', 'bottom');
+      script.setAttribute('data-theme', 'preferred_color_scheme');
+      script.setAttribute('data-lang', 'en');
+      script.setAttribute('crossorigin', 'anonymous');
+      script.async = true;
+      document.head.appendChild(script);
+    } else {
+      console.log('Giscus comments disabled in local development. Will load on GitHub Pages.');
+    }
+  })();
+</script>
+
+    <script src="https://pl30577664.effectivecpmnetwork.com/85/f6/9f/85f69f080aa245183c13e2904e865553.js"></script>
+  </body>
+</html>
