@@ -1,6 +1,6 @@
 # AGENTS.md
 
-Static single-page portfolio + blog + payments. **No build system, no package.json, no tests, no CI** — plain HTML/CSS/JS served as-is. Do not scaffold tooling.
+Static single-page portfolio + blog + payments. **No build system, no package.json, no tests** — plain HTML/CSS/JS served as-is. Do not scaffold tooling. One optional GitHub Action (`.github/workflows/feeds.yml`) maintains `data/youtube.json` from the channel RSS; it activates only when `youtube.channelId` is set in `data/site-config.json`.
 
 ## Structure
 

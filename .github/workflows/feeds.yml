@@ -1,0 +1,74 @@
+name: refresh-youtube-feed
+
+# Maintains data/youtube.json from the channel RSS feed.
+# Only does anything once `youtube.channelId` is set in data/site-config.json.
+# The site (js/render-site-config.js) reads this file first, falls back to live
+# RSS fetch, then to the static channel card. No secrets required.
+
+on:
+  schedule:
+    - cron: "0 */6 * * *" # every 6 hours
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Read channel id from site-config
+        id: cfg
+        run: |
+          CHANNEL_ID=$(jq -r '.youtube.channelId // empty' data/site-config.json)
+          echo "channel_id=$CHANNEL_ID" >> "$GITHUB_OUTPUT"
+
+      - name: Fetch channel RSS
+        if: steps.cfg.outputs.channel_id != ''
+        run: |
+          curl -fsSL "https://www.youtube.com/feeds/videos.xml?channel_id=${{ steps.cfg.outputs.channel_id }}" -o /tmp/feed.xml
+
+      - name: Build data/youtube.json
+        if: steps.cfg.outputs.channel_id != ''
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from datetime import datetime, timezone
+          xml = open('/tmp/feed.xml', encoding='utf-8').read()
+          entries = re.findall(r'<entry>(.*?)</entry>', xml, re.S)
+          videos = []
+          for en in entries[:6]:
+              vid = re.search(r'<yt:videoId>(.*?)</yt:videoId>', en)
+              title = re.search(r'<title>(.*?)</title>', en)
+              stats = re.search(r'views="(\d+)"', en)
+              pub = re.search(r'<published>(.*?)</published>', en)
+              if not vid:
+                  continue
+              videos.append({
+                  "id": vid.group(1),
+                  "title": title.group(1) if title else "Untitled",
+                  "url": "https://www.youtube.com/watch?v=" + vid.group(1),
+                  "thumbnail": "https://i.ytimg.com/vi/" + vid.group(1) + "/hqdefault.jpg",
+                  "views": int(stats.group(1)) if stats else 0,
+                  "published": pub.group(1) if pub else ""
+              })
+          json.dump(
+              {"updated": datetime.now(timezone.utc).isoformat(), "videos": videos},
+              open('data/youtube.json', 'w'),
+              indent=2,
+          )
+          PY
+
+      - name: Commit feed update
+        if: steps.cfg.outputs.channel_id != ''
+        run: |
+          git config user.name "feed-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/youtube.json
+          if git diff --cached --quiet; then
+            echo "no changes"
+          else
+            git commit -m "chore: refresh youtube feed" && git push
+          fi
