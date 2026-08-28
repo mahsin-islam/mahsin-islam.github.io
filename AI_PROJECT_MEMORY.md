@@ -583,6 +583,27 @@ git add . && git commit -m "content: new case study X" && git push origin main
 
 Search consolidation + debounce (per-page search works fine today), work.html adoption of the shared case-study renderer (medium-risk refactor), GitHub Action prebuild for YouTube/Medium feeds (**needs YouTube channel ID + pushed repo**), SRI hashes for CDN scripts (verify after deploy), AdSense/privacy page only when monetizing.
 
+### Phase C (final round) — completed
+
+| # | Change | Files |
+|---|---|---|
+| 36 | **Courses & tutorials section** (`#courses`, settings-driven): renders real video cards with thumbnails + view counts. Priority: prebuilt `data/youtube.json` → live channel RSS (when `youtube.channelId` set) → graceful channel fallback card | `index.html`, `js/render-site-config.js`, `data/site-config.json` |
+| 37 | **Shared search engine**: new `js/search.js` (`initSiteSearch({seeds,dataFiles})`, 180 ms debounce, lazy index); all 4 inline search implementations deleted and rewired | `js/search.js` (new), `index/blog/work/services.html` |
+| 38 | **work.html renderer unification**: deleted its duplicate inline renderer + video lightbox (~200 lines); now uses shared `js/render-case-studies.js`; modal gets focus management + dialog role; placeholder CSS aligned with shared renderer markup | `work.html` |
+| 39 | **Self-activating feed pipeline**: `.github/workflows/feeds.yml` (6-hourly + manual) reads `youtube.channelId` from site-config, fetches channel RSS, regenerates `data/youtube.json`, commits — activates automatically after first push with a channel ID; seed `data/youtube.json` created | `.github/workflows/feeds.yml` (new), `data/youtube.json` (new) |
+| 40 | Service worker precaches `search.js`; AGENTS.md updated (search.js, work.html, Action exception) | `service-worker.js`, `AGENTS.md` |
+| 41 | Git: all work committed (5 commits), tree clean | repo |
+
+### ROADMAP STATUS — all implementable work complete
+
+| Phase | Status |
+|---|---|
+| A — fixes & trust | ✅ done (round 0) |
+| B — sections & branding | ✅ done — AI Lab, courses feed, products+demo pages, Scholar/Play/FB/DazzleoIT links, data-driven events, lifestyle, notices |
+| C — engineering | ✅ done — shared JS (common/search), renderer unification, a11y, dead CSS, feed Action |
+| Data checklist for owner | ✅ `DATA_NEEDED.md` + `README.md` |
+| Owner handoff only | enter data per `DATA_NEEDED.md` → `git remote add origin https://github.com/MAHSIN-ISLAM/MAHSIN-ISLAM.github.io.git` → `git push -u origin main --force` → enable Pages |
+
 ### Phase B remaining (blocked on owner data)
 
 Course-thumbs feed (needs YouTube **channel ID**), product demo pages + real product list, lifestyle facts, certificate/event images, case-study screenshots & metrics, Play Store app names for cards.

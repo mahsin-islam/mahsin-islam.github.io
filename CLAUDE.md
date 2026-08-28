@@ -4,123 +4,99 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal portfolio website for Md. Mahsin-Ul-Islam, a software engineer and researcher. Static HTML/CSS/JavaScript site with PWA features, deployed on GitHub Pages.
+Personal portfolio website for Md. Mahsin-Ul-Islam, a software engineer and researcher. 100% static HTML/CSS/vanilla-JS site with PWA features, deployed on GitHub Pages.
 
-**Key Architecture**: Content is data-driven via JSON files. To add case studies, blog posts, events, products, or site-wide settings, edit JSON — no HTML modification needed.
+**No build system, no package.json, no tests — do not scaffold tooling.** Plain files are served as-is; the only workflow is edit + push.
+
+**Key architecture**: Content is data-driven via JSON files in `data/`. Renderers in `js/` fetch the JSON at runtime and build the DOM. To add case studies, blog posts, events, products, or site-wide settings, edit JSON — no HTML modification needed.
 
 ## Development Commands
 
 ### Local Testing
 ```bash
-# Required for testing fetch() calls to JSON files
 python -m http.server 8000
 # Then visit http://localhost:8000
 ```
+`fetch()` of JSON is blocked on `file://` — always test through a local server.
 
 ### Deployment
+`origin` already points at the Pages repository (`MAHSIN-ISLAM/MAHSIN-ISLAM.github.io`):
 ```bash
-git add .
-git commit -m "description"
-git push origin main
+git add . && git commit -m "description" && git push origin main
 # GitHub Pages auto-rebuilds in ~2 minutes
 ```
+Verify with a hard refresh (Ctrl+Shift+R) — the service worker caches static assets. See `DEPLOYMENT.md` for first-push details.
 
 ## Architecture & Structure
 
-### Content Management (Data-Driven)
-- **Case studies**: `data/case-studies.json` → rendered by `js/render-case-studies.js` (index + work)
-- **Blog posts**: `data/blogs.json` → each post has corresponding HTML file in `blog/`
-- **Events/certificates**: `data/events.json` → rendered by `js/render-events.js` (index)
-- **Digital products**: `data/products.json` → `products.html` (catalog + `?slug=` demo pages)
-- **Site settings**: `data/site-config.json` → notice bar, featured video, brand URLs, lifestyle section via `js/render-site-config.js`
-- **Adding content**: Edit JSON only. The JavaScript builds the page automatically.
+### Content pipeline (JSON → renderer → page)
 
-### Key Files
-- `index.html` — Main portfolio page with inline styles
-- `blog.html` — Blog listing (JSON + Medium RSS, paginated)
-- `services.html` — Services, courses, digital products, payments
-- `work.html` — Projects/work showcase (own inline renderer)
-- `products.html` — Digital products catalog + demo pages
-- `js/common.js` — Shared year/theme/mobile-nav/modal-focus helpers (all pages)
-- `js/render-case-studies.js` — Dynamic case study rendering with galleries, impact bars, count-up
-- `js/render-events.js` — Data-driven events/certificates with popup modal
-- `js/render-site-config.js` — Notice bar + featured-video facade + lifestyle
-- `service-worker.js` — PWA offline cache (network-first for `/data/*`)
-- `site.webmanifest` — PWA manifest
+| Content | Edit | Rendered by | Where it appears |
+|---|---|---|---|
+| Case studies | `data/case-studies.json` | `js/render-case-studies.js` | `index.html` + `work.html` (same shared renderer; each page has its own inline detail modal) |
+| Events/certificates | `data/events.json` | `js/render-events.js` | `index.html` (`#events-list`, popup `#certificate-modal`) |
+| Blog posts | `data/blogs.json` | inline script in `blog.html` (+ Medium RSS via rss2json proxy) | `blog.html` listing + one SEO shell per post in `blog/` |
+| Digital products | `data/products.json` | inline script in `products.html` | catalog + demo pages at `products.html?slug=<id>` |
+| Site settings | `data/site-config.json` | `js/render-site-config.js` | notice bar, featured-video facade, lifestyle grid, courses (`index.html`) |
+| YouTube course feed | `data/youtube.json` (generated) | `js/render-site-config.js` | `#courses` on `index.html` |
 
-### JavaScript Features
-- Intersection observer for scroll-triggered animations
-- Video lightbox + click-to-play facades (privacy-enhanced `youtube-nocookie`)
-- Gallery carousel for case study images
-- Count-up animations for numeric metrics only (never clobbers text values)
-- Dynamic content loading from JSON
-- Settings-driven dismissible notice bar
+Content rules:
+- **Edit JSON only.** Never hardcode case studies, products, or events into HTML. Array order = display order.
+- JSON must stay valid (no comments, no trailing commas) — a parse failure empties the section (renderers fail soft with an error card / no-op).
+- All JSON text fields are HTML-escaped by renderers (XSS-safe). Exception: blog post `content` is injected as raw HTML — trusted author content only.
+- Placeholder metrics: `"placeholder": true` renders muted em-dashes — never fabricate values.
+
+### Shared JS layer
+- `js/common.js` — loaded on **every** page: footer year (`#year`), theme init/toggle, mobile nav wiring, `window.__a11y` modal-focus helpers (`saveFocus`/`focusFirst`/`restoreFocus`). Never re-implement these inline.
+- `js/search.js` — shared search engine (180 ms debounce, lazily-built index). Any page containing the `.search-wrap` markup calls `initSiteSearch({ seeds, dataFiles })`. Never write inline search code. Used by index/blog/work/services.
+- `js/render-case-studies.js` — fetches into `#case-study-list`: glassmorphism cards, gallery carousel, video lightbox, before/after impact bars, count-up (numeric metrics only), collapsible diagrams. Dispatches `case-studies:rendered` when done.
+- `js/render-events.js` — fetches into `#events-list`; dispatches `events:rendered`.
+- `js/render-site-config.js` — everything settings-driven from `data/site-config.json`; safe no-op if the JSON is missing or invalid.
+
+**Renderer contract** — when touching `index.html`, `work.html`, or a renderer, preserve:
+- `.reveal` class on generated entries and the `case-studies:rendered` / `events:rendered` events (inline scripts listen for these to re-run GSAP reveals + `ScrollTrigger.refresh()`)
+- the `<noscript>` fallback inside `#case-study-list`
+- relative fetch paths (`data/*.json` from root pages, `../data/*.json` from `blog/` posts)
+- modal focus management via `window.__a11y`, plus `role="dialog"` / `aria-modal` / `aria-live` on search results
+
+### YouTube feed pipeline (self-activating)
+`.github/workflows/feeds.yml` runs every 6 hours: it reads `youtube.channelId` from `data/site-config.json` and, only if set, fetches the channel RSS and commits a refreshed `data/youtube.json`. It is inert until a channel ID is added — no secrets, no API key. Client-side priority: prebuilt `data/youtube.json` → live channel RSS → static fallback card.
+
+### Theme system (all pages)
+- Dark default; light mode via `data-theme="light"` on `<html>`, driven by CSS custom properties.
+- A tiny pre-paint head script on every page reads `localStorage.theme` before first render (no flash). The toggle is wired only by `js/common.js` (targets `document.documentElement`, guards `localStorage`).
+- GSAP-CDN failure fallback: main scripts add `html.no-gsap`, which force-shows all `.reveal` content. Never ship CSS that can hide content permanently.
 
 ### Styling
-- All CSS is inline in HTML files (no separate CSS files)
-- CSS custom properties (variables) for theming
-- Dark default + light mode via `data-theme` on `<html>`
-- Responsive design with mobile-first approach
-- Font Awesome icons via CDN
-
-### Theme System (all pages)
-- Pre-paint head script reads `localStorage.theme` before first render (no flash)
-- Toggle wired by `js/common.js` — targets `document.documentElement`
-- GSAP-CDN failure fallback: `html.no-gsap` force-shows all `.reveal` content
-
-## Adding New Case Studies
-
-1. Edit `data/case-studies.json`
-2. Copy an existing entry block and modify
-3. Fields: `id`, `number`, `category`, `title`, `role`, `problem`, `approach`, `metrics`, `tech`, `links`
-4. Optional: `image` (path to screenshot), `video` (YouTube ID), `gallery` (array of images), `impact`, `diagram`
-5. See `HOW_TO_ADD_CASE_STUDIES.md` for complete reference
+- All CSS is inline in HTML files (no separate CSS files); mobile-first responsive.
+- Font Awesome, Google Fonts, and GSAP + ScrollTrigger via CDN (with the no-gsap fallback above).
 
 ## Adding Blog Posts
 
-1. Create HTML file in `blog/` directory (e.g., `your-post-slug.html`) — copy an existing template
-2. Update its `<title>`, meta tags, `const slug`, and the `.catch()` fallback text
-3. Add entry to `data/blogs.json`
-4. Update `sitemap.xml` and `rss.xml`
+1. Create `blog/<slug>.html` from an existing post template — update `<title>`, meta tags, the `const slug`, and the `.catch()` fallback text.
+2. Add an entry to `data/blogs.json` (`content` is an HTML string).
+3. Update `sitemap.xml` and `rss.xml`.
+
+For case studies, see `HOW_TO_ADD_CASE_STUDIES.md` (full field reference: `gallery`, `impact`, `diagram`; `video` is a YouTube video **ID**, not a URL).
 
 ## Important Notes
 
-### Local Development
-- Must use local server for JSON `fetch()` calls to work (browsers block file:// fetches)
-- Direct file opening of HTML will break dynamic content loading
-
-### Deployment
-- Target branch: `main` (GitHub Pages source)
-- Auto-deploys on push to main
-- Takes ~2 minutes to rebuild
-- This folder is not a git repo yet — see `DEPLOYMENT.md` for `git init` + push steps
-
-### Performance
-- PWA with service worker caching
-- Images should be optimized (< 300KB each)
-- Lazy loading for case study images
-- Lighthouse score targets: 90+ performance
+- **Service worker** (`service-worker.js`, cache `portfolio-v4`): network-first for `/data/*` (edits appear immediately), cache-first for other same-origin GETs, never caches POST/cross-origin/API calls. **Bump the `CACHE` name when changing the precache list**, or returning visitors keep the old cache.
+- **Ads/monetization scripts are intentionally absent.** If re-adding later, blog pages only — never index/work/services/products.
+- `_archive/` is a local git-ignored dump of legacy docs — never edit or deploy it.
+- Images should be optimized (< 300 KB each); lazy loading for JSON-driven images.
+- Lighthouse target: 90+ performance.
 
 ### Content Philosophy
-- Case studies show real impact with metrics
-- Placeholder metrics allowed (set `"placeholder": true`) — never fabricate values
-- Honest status indicators ("In development", "Shipped", etc.)
-- No invented testimonials, achievements, or events
+- Case studies show real impact with metrics; placeholder metrics allowed (`"placeholder": true`) — never fabricate values.
+- Honest status indicators ("In development", "Shipped", etc.).
+- No invented testimonials, achievements, or events.
 
 ## Existing Documentation
 
-- `AI_PROJECT_MEMORY.md` — **authoritative architecture memory + gap analysis + phased roadmap + changelog**
-- `HOW_TO_ADD_CASE_STUDIES.md` — Detailed case study guide
-- `DEPLOYMENT.md` — Deployment procedures
-- `ACCOUNTS.md` — Account information
-- `AGENTS.md` — AI agent instructions (same rules, agent-tool flavor)
-
-## Tech Stack Summary
-
-- **Frontend**: HTML5, CSS3, Vanilla JavaScript (no frameworks)
-- **Hosting**: GitHub Pages
-- **PWA**: Service worker, web manifest
-- **Icons**: Font Awesome (CDN)
-- **Fonts**: Google Fonts (via CDN)
-- **Animation**: GSAP + ScrollTrigger (CDN, with no-JS/no-CDN fallbacks)
-- **No build tools required** — direct file editing and deployment
+- `AI_PROJECT_MEMORY.md` — **authoritative architecture memory + gap analysis + phased roadmap + changelog** (read before big changes)
+- `AGENTS.md` — same rules in agent-tool flavor, plus a full file map and integration register
+- `HOW_TO_ADD_CASE_STUDIES.md` — case-study field reference
+- `DEPLOYMENT.md` — deployment + maintenance
+- `ACCOUNTS.md` — third-party accounts to create and where keys go
+- `DATA_NEEDED.md` — prioritized checklist of content/assets the owner supplies
