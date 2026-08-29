@@ -1,2 +1,4 @@
 google.com, pub-8014361737169509, DIRECT, f08c47fec0942fa0
 vungle.com, 6a92c56514088f27314a15f7, DIRECT, c107d686becd2d77
+ironsrc.com, 677485, DIRECT, 5a3a5b672c9db8f5
+facebook.com, 335229878970223, DIRECT, c3e20eee3f780d68
