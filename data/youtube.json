@@ -1,6 +1,14 @@
 {
-  "updated": "2026-09-30T21:55:22.604894+00:00",
+  "updated": "2026-10-01T12:33:11.488751+00:00",
   "videos": [
+    {
+      "id": "xgkaJdaSFlc",
+      "title": "SanTra Explained | Enterprise Sanctions Screening Platform for Banks | FastAPI, Next.js, PostgreSQL",
+      "url": "https://www.youtube.com/watch?v=xgkaJdaSFlc",
+      "thumbnail": "https://i.ytimg.com/vi/xgkaJdaSFlc/hqdefault.jpg",
+      "views": 11,
+      "published": "2026-10-01T05:00:28+00:00"
+    },
     {
       "id": "CyWhn0WseXg",
       "title": "What If Immigration Lawyers Had an AI That Researches IRCC Data &amp; Posts Content for Them?",
@@ -40,14 +48,6 @@
       "thumbnail": "https://i.ytimg.com/vi/3DDdReojHME/hqdefault.jpg",
       "views": 55,
       "published": "2026-07-01T05:26:45+00:00"
-    },
-    {
-      "id": "meGnPiQdFdg",
-      "title": "Advance Your Career with a Bangladesh Open University-BOU Professional MBA! \ud83c\udf93 (Fall 2025 Circular)",
-      "url": "https://www.youtube.com/watch?v=meGnPiQdFdg",
-      "thumbnail": "https://i.ytimg.com/vi/meGnPiQdFdg/hqdefault.jpg",
-      "views": 79,
-      "published": "2026-06-17T14:36:36+00:00"
     }
   ]
 }
