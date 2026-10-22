@@ -1,12 +1,12 @@
 {
-  "updated": "2026-10-21T21:18:42.920277+00:00",
+  "updated": "2026-10-22T11:15:21.795233+00:00",
   "videos": [
     {
       "id": "xgkaJdaSFlc",
       "title": "SanTra Explained | Enterprise Sanctions Screening Platform for Banks | FastAPI, Next.js, PostgreSQL",
       "url": "https://www.youtube.com/watch?v=xgkaJdaSFlc",
       "thumbnail": "https://i.ytimg.com/vi/xgkaJdaSFlc/hqdefault.jpg",
-      "views": 42,
+      "views": 43,
       "published": "2026-10-01T05:00:28+00:00"
     },
     {
@@ -38,7 +38,7 @@
       "title": "Flutter Gesture System Explained in Bangla | Pointers vs Gestures",
       "url": "https://www.youtube.com/watch?v=VsEZQ256sw4",
       "thumbnail": "https://i.ytimg.com/vi/VsEZQ256sw4/hqdefault.jpg",
-      "views": 50,
+      "views": 52,
       "published": "2026-07-07T11:21:38+00:00"
     },
     {
